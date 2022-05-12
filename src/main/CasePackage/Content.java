@@ -1,3 +1,5 @@
+package CasePackage;
+
 import java.util.List;
 
 public class Content

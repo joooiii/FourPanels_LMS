@@ -1,3 +1,7 @@
+package CasePackage;
+
+import UserPackage.User;
+
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
