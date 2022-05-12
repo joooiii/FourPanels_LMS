@@ -1,9 +1,9 @@
 import java.time.Instant;
-import java.util.HashSet;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class User
 {
-    private String userID;
+    private int userID;
     private String eMail;
     private String password;
     private Instant createdAt;
@@ -11,10 +11,11 @@ public class User
     private Personal personal;
     private Social social;
     private Score score;
+    private static final AtomicInteger countID= new AtomicInteger(0);
 
-    public User(String userID, String eMail, String password, Instant createdAt, Instant updatedAt, Personal personal, Social social, Score score)
+    public User(int userID, String eMail, String password, Instant createdAt, Instant updatedAt, Personal personal, Social social, Score score)
     {
-        this.userID = userID;
+        this.userID = countID.incrementAndGet();
         this.eMail = eMail;
         this.password = password;
         this.createdAt = createdAt;
@@ -24,14 +25,15 @@ public class User
         this.score = score;
     }
 
-    public String getUserID()
+    public int getUserID()
     {
         return userID;
     }
 
-    public void setUserID(String userID)
+    public void setUserID(int userID)
     {
-        this.userID = userID;
+        userID= countID.incrementAndGet();
+
     }
 
     public String geteMail()
