@@ -1,3 +1,5 @@
+package CasePackage;
+
 public class Answer
 {
     private String answerID;

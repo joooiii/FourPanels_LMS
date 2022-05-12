@@ -1,3 +1,5 @@
+package UserPackage;
+
 import java.time.LocalDateTime;
 
 public class ScoreEvent
