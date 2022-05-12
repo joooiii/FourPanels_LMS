@@ -1,5 +1,6 @@
 package CasePackage;
 
+import KeywordPackage.Keyword;
 import UserPackage.User;
 
 import java.time.Instant;
