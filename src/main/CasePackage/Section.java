@@ -1,3 +1,8 @@
+package CasePackage;
+
+import CasePackage.MediaSection;
+import CasePackage.TextSection;
+
 public class Section
 {
     private TextSection text;
