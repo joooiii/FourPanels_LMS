@@ -1,5 +1,7 @@
 package UserPackage;
 
+import KeywordPackage.Keyword;
+
 import java.time.Instant;
 import java.util.HashSet;
 
@@ -13,6 +15,7 @@ public class User
     private Personal personal;
     private Social social;
     private Score score;
+    private HashSet<Keyword> keywords;
 
     public User(Integer userID, String eMail, String password, Instant createdAt, Instant updatedAt, Personal personal, Social social, Score score)
     {
