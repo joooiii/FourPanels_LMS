@@ -6,11 +6,10 @@ import UserPackage.User;
 import java.time.Instant;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Case
 {
-    private int ID;
+    private String ID;
     private Instant createdAt;
     private Instant updatedAt;
     private User owner;
@@ -18,22 +17,20 @@ public class Case
     private List<Keyword> keywords;
     private Voting voting;
     private Content content;
-    private static final AtomicInteger countCaseId= new AtomicInteger(0);
 
     public Case()
     {
 
     }
 
-    public int getID()
+    public String getID()
     {
         return ID;
     }
 
-    public void setID(int ID)
-
+    public void setID(String ID)
     {
-        ID= countCaseId.incrementAndGet();
+        this.ID = ID;
     }
 
     public Instant getCreatedAt()

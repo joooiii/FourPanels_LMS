@@ -1,9 +1,13 @@
+package UserPackage;
+
+import KeywordPackage.Keyword;
+
 import java.time.Instant;
 import java.util.HashSet;
 
 public class User
 {
-    private String userID;
+    private Integer userID;
     private String eMail;
     private String password;
     private Instant createdAt;
@@ -11,8 +15,9 @@ public class User
     private Personal personal;
     private Social social;
     private Score score;
+    private HashSet<Keyword> keywords;
 
-    public User(String userID, String eMail, String password, Instant createdAt, Instant updatedAt, Personal personal, Social social, Score score)
+    public User(Integer userID, String eMail, String password, Instant createdAt, Instant updatedAt, Personal personal, Social social, Score score)
     {
         this.userID = userID;
         this.eMail = eMail;
@@ -24,12 +29,12 @@ public class User
         this.score = score;
     }
 
-    public String getUserID()
+    public Integer getUserID()
     {
         return userID;
     }
 
-    public void setUserID(String userID)
+    public void setUserID(Integer userID)
     {
         this.userID = userID;
     }
@@ -103,5 +108,7 @@ public class User
     {
         this.score = score;
     }
+
+    //TODO add, remove, accept, decline
 }
 
