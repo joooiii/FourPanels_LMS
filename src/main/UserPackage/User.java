@@ -1,6 +1,7 @@
 package UserPackage;
 
-import KeywordPackage.Keyword;
+
+import KeywordPackage.Keywords;
 
 import java.time.Instant;
 import java.util.HashSet;
@@ -15,7 +16,7 @@ public class User
     private Personal personal;
     private Social social;
     private Score score;
-    private HashSet<Keyword> keywords;
+    private HashSet<Keywords> keywords;
 
     public User(Integer userID, String eMail, String password, Instant createdAt, Instant updatedAt, Personal personal, Social social, Score score)
     {
@@ -48,6 +49,7 @@ public class User
     {
         if (eMail.matches("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])"))
             this.eMail = eMail;
+        this.updatedAt = Instant.now();
     }
 
     public String getPassword()
@@ -111,5 +113,10 @@ public class User
     }
 
     //TODO add, remove, accept, decline
+
+    public void addFriend(User other)
+    {
+//        if (this.social)
+    }
 }
 

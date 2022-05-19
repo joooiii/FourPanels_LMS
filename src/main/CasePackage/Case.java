@@ -1,6 +1,6 @@
 package CasePackage;
 
-import KeywordPackage.Keyword;
+import KeywordPackage.Keywords;
 import UserPackage.User;
 
 import java.time.Instant;
@@ -14,14 +14,14 @@ public class Case
     private Instant updatedAt;
     private User owner;
     private HashMap<String, User> members;
-    private List<Keyword> keywords;
+    private List<Keywords> keywords;
     private Voting voting;
     private Content content;
 
-    public Case()
-    {
-
-    }
+//    public Case()
+//    {
+//
+//    }
 
     public String getID()
     {
@@ -73,12 +73,12 @@ public class Case
         this.members = members;
     }
 
-    public List<Keyword> getKeywords()
+    public List<Keywords> getKeywords()
     {
         return keywords;
     }
 
-    public void setKeywords(List<Keyword> keywords)
+    public void setKeywords(List<Keywords> keywords)
     {
         this.keywords = keywords;
     }
