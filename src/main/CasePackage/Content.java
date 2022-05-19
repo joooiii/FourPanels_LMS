@@ -9,6 +9,7 @@ public class Content
 
     public Content()
     {
+
     }
 
     public String getTitle()
