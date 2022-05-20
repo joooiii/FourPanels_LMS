@@ -6,6 +6,9 @@ import KeywordPackage.Keywords;
 import java.time.Instant;
 import java.util.HashSet;
 
+import static UserPackage.Relationship.relationshipType.friended;
+import static UserPackage.Relationship.relationshipType.incoming;
+
 public class User
 {
     private Integer userID;
@@ -116,7 +119,23 @@ public class User
 
     public void addFriend(User other)
     {
-//        if (this.social)
+        this.social.getContacts().put(other.getUserID(), new Relationship(friended));
+
+    }
+
+    public void removeFriend()
+    {
+
+    }
+
+    public void acceptRequest()
+    {
+
+    }
+
+    public void declineRequest()
+    {
+
     }
 }
 
