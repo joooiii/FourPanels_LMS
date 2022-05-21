@@ -1,15 +1,17 @@
 package CasePackage;
 
-import CasePackage.Answer;
-
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import static validation.Ensurer.ensureNonBlank;
+
 
 public class Voting
 {
     private String question;
-    private List<Answer> answers;
+    private List<String> answers;
     private HashMap<String, Double> results;
     private LocalDateTime endsAt;
 
@@ -25,17 +27,23 @@ public class Voting
 
     public void setQuestion(String question)
     {
-        this.question = question;
+        this.question =ensureNonBlank(question, "question");
     }
 
-    public List<Answer> getAnswers()
+    public List<String> getAnswers()
     {
         return answers;
     }
 
-    public void setAnswers(List<Answer> answers)
+    public void setAnswers()
     {
-        this.answers = answers;
+        this.answers = new ArrayList<>();
+    }
+
+    public void addAnswers(String answer)
+    {
+        answers.add(answer);
+
     }
 
     public HashMap<String, Double> getResults()
@@ -45,7 +53,7 @@ public class Voting
 
     public void setResults(HashMap<String, Double> results)
     {
-        this.results = results;
+        this.results= results;
     }
 
     public LocalDateTime getEndsAt()
@@ -57,4 +65,6 @@ public class Voting
     {
         this.endsAt = endsAt;
     }
+
+
 }
