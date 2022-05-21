@@ -119,12 +119,21 @@ public class User
 
     public void addFriend(User other)
     {
-        this.social.getContacts().put(other.getUserID(), new Relationship(friended));
+        if (!social.getContacts().containsKey(other.getUserID())) {
+            this.social.getContacts().put(other.getUserID(), new Relationship(friended));
+            other.social.getContacts().put(this.getUserID(), new Relationship(friended));
+        } else
+            System.out.println("User bereits befreundet");
 
     }
 
-    public void removeFriend()
+    public void removeFriend(User other)
     {
+        if (social.getContacts().containsKey(other.getUserID())) {
+            this.social.getContacts().remove(other.getUserID());
+            other.social.getContacts().remove(this.getUserID());
+        } else
+            System.out.println("User nicht befreundet");
 
     }
 
