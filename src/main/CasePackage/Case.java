@@ -4,8 +4,7 @@ import KeywordPackage.Keywords;
 import UserPackage.User;
 
 import java.time.Instant;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Case
@@ -26,6 +25,7 @@ public class Case
 //    }
 
     public Integer getID()
+
     {
         return ID;
     }
@@ -40,31 +40,29 @@ public class Case
         return createdAt;
     }
 
-    public void setCreatedAt(Instant createdAt)
+    public void setCreatedAt()
     {
-        this.createdAt = createdAt;
+        this.createdAt = Instant.now();
     }
 
     public Instant getUpdatedAt()
+
     {
         return updatedAt;
     }
 
     public void setUpdatedAt(Instant updatedAt)
     {
-        this.updatedAt = updatedAt;
+        this.updatedAt = Instant.now();
     }
 
-    public User getOwner()
+// owner is unser... but we will not to get all user data, but only name, and conutry?
+//    maybe inheritange or asociation
+    public void setOwner()
     {
-        return owner;
-    }
 
-    public void setOwner(User owner)
-    {
-        this.owner = owner;
     }
-
+// what are the members?
     public HashMap<String, User> getMembers()
     {
         return members;
@@ -82,8 +80,10 @@ public class Case
 
     public void setKeywords(List<Keywords> keywords)
     {
-        this.keywords = keywords;
+       this.keywords= keywords;
+
     }
+
 
     public Voting getVoting()
     {
