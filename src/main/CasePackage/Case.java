@@ -13,6 +13,9 @@ public class Case
     private Instant createdAt;
     private Instant updatedAt;
     private User owner;
+    private String userFirstName;
+    private String userLastName;
+    private Integer userID;
     private HashMap<String, User> members;
     private List<Keywords> keywords;
     private Voting voting;
@@ -58,9 +61,15 @@ public class Case
 
 // owner is unser... but we will not to get all user data, but only name, and conutry?
 //    maybe inheritange or asociation
-    public void setOwner()
+    public void setOwnerFirstName()
     {
+        userFirstName=owner.getPersonal().getFirstName();
 
+    }
+
+    public void setOwnerLastName()
+    {
+        userLastName=owner.getPersonal().getLastName();
     }
 // what are the members?
     public HashMap<String, User> getMembers()
