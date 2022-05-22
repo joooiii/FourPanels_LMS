@@ -1,8 +1,5 @@
 package CasePackage;
 
-import CasePackage.MediaSection;
-import CasePackage.TextSection;
-
 public class Section
 {
     private TextSection text;
@@ -11,6 +8,8 @@ public class Section
 
     public Section()
     {
+        this.text = text;
+        this.media = media;
     }
 
     public TextSection getText()

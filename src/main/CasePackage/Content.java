@@ -1,6 +1,9 @@
 package CasePackage;
 
+import KeywordPackage.Keyword;
+
 import java.util.List;
+import java.util.Scanner;
 
 public class Content
 {
@@ -9,6 +12,13 @@ public class Content
 
     public Content()
     {
+
+    }
+
+    public void addKeywords()
+    {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
 
     }
 

@@ -1,7 +1,7 @@
 package UserPackage;
 
 
-import KeywordPackage.Keywords;
+import KeywordPackage.Keyword;
 
 import java.time.Instant;
 import java.util.HashSet;
@@ -18,7 +18,7 @@ public class User
     private Personal personal;
     private Social social;
     private Score score;
-    private HashSet<Keywords> keywords;
+    private HashSet<Keyword> keywords;
 
     public User(Integer userID, String eMail, String password, Instant createdAt, Instant updatedAt, Personal personal, Social social, Score score)
     {
@@ -127,42 +127,42 @@ public class User
 //
 //    }
 
-    public void sendRequest(User other)
-    {
-        if (!social.getContacts().containsKey(other.getUserID())) {
-            this.social.getContacts().put(other.getUserID(), new Relationship(outgoing));
-            other.social.getContacts().put(this.getUserID(), new Relationship(incoming));
-        } else
-            System.out.println("User ist bereits befreundet");
-    }
-
-    public void acceptRequest(User other)
-    {
-        if (social.getContacts().containsKey(other.getUserID())) {
-            this.social.getContacts().replace(other.getUserID(), new Relationship(friended));
-            other.social.getContacts().replace(this.getUserID(), new Relationship(friended));
-        } else
-            System.out.println("Es existiert kein Request");
-    }
-
-    public void declineRequest(User other)
-    {
-        if (social.getContacts().containsKey(other.getUserID())) {
-            this.social.getContacts().remove(other.getUserID());
-            other.social.getContacts().remove(this.getUserID());
-        } else
-            System.out.println("Es existiert kein Request");
-
-    }
-
-    public void removeFriend(User other)
-    {
-        if (social.getContacts().containsKey(other.getUserID())) {
-            this.social.getContacts().remove(other.getUserID());
-            other.social.getContacts().remove(this.getUserID());
-        } else
-            System.out.println("User nicht befreundet");
-
-    }
+//    public void sendRequest(User other)
+//    {
+//        if (!social.getContacts().containsKey(other.getUserID())) {
+//            this.social.getContacts().put(other.getUserID(), new Relationship(outgoing));
+//            other.social.getContacts().put(this.getUserID(), new Relationship(incoming));
+//        } else
+//            System.out.println("User ist bereits befreundet");
+//    }
+//
+//    public void acceptRequest(User other)
+//    {
+//        if (social.getContacts().containsKey(other.getUserID())) {
+//            this.social.getContacts().replace(other.getUserID(), new Relationship(friended));
+//            other.social.getContacts().replace(this.getUserID(), new Relationship(friended));
+//        } else
+//            System.out.println("Es existiert kein Request");
+//    }
+//
+//    public void declineRequest(User other)
+//    {
+//        if (social.getContacts().containsKey(other.getUserID())) {
+//            this.social.getContacts().remove(other.getUserID());
+//            other.social.getContacts().remove(this.getUserID());
+//        } else
+//            System.out.println("Es existiert kein Request");
+//
+//    }
+//
+//    public void removeFriend(User other)
+//    {
+//        if (social.getContacts().containsKey(other.getUserID())) {
+//            this.social.getContacts().remove(other.getUserID());
+//            other.social.getContacts().remove(this.getUserID());
+//        } else
+//            System.out.println("User nicht befreundet");
+//
+//    }
 }
 
