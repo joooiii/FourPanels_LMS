@@ -40,6 +40,11 @@ public class Voting
         this.answers = new ArrayList<>();
     }
 
+    public void answerType(boolean answerType)
+    {
+
+    }
+
     public void addAnswers(String answer)
     {
         answers.add(answer);
