@@ -1,22 +1,31 @@
 package CasePackage;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
+import static validation.Ensurer.ensureNonBlank;
+
 public class Answer
 {
-    private String answerID;
+    private Integer answerID;
     private String answerText;
+    private static final AtomicInteger count = new AtomicInteger(0);
+    private boolean answerType;
 
-    public Answer()
+    public Answer(String answerText)
     {
+        this.answerText=ensureNonBlank(answerText,"answer");
+        this.answerID=count.incrementAndGet();
     }
 
-    public String getAnswerID()
+    public Integer getAnswerID()
     {
         return answerID;
     }
 
-    public void setAnswerID(String answerID)
+    public void setAnswerID()
     {
-        this.answerID = answerID;
+        this.answerID = count.incrementAndGet();
+
     }
 
     public String getAnswerText()
@@ -24,8 +33,11 @@ public class Answer
         return answerText;
     }
 
-    public void setAnswerText(String answerText)
+    public void setAnswerText
+            (String answerText)
     {
-        this.answerText = answerText;
+        this.answerText =ensureNonBlank(answerText, "answer");
+
     }
+
 }
