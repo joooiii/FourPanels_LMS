@@ -68,7 +68,7 @@ public class Voting
 
     }
 
-   
+
     public HashMap<String,Double> getResults()
     {
         return results;
