@@ -87,12 +87,12 @@ public class Case
         return keywords;
     }
 
+    // wie zugreife icn im Keywords...?
     public void setKeywords(List<Keyword> keywords)
     {
-       this.keywords= keywords;
+        this.keywords=keywords;
 
     }
-
 
     public Voting getVoting()
     {
