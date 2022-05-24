@@ -1,5 +1,7 @@
 package UserPackage;
 
+import validation.Ensurer;
+
 import java.time.LocalDate;
 
 public class Personal
@@ -11,10 +13,10 @@ public class Personal
 
     public Personal(String firstName, String lastName, LocalDate birthday, String title)
     {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstName = Ensurer.ensureNonBlank(firstName, "first name");
+        this.lastName = Ensurer.ensureNonBlank(lastName, "last name");
         this.birthday = birthday;
-        this.title = title;
+        this.title = Ensurer.ensureNonBlank(title, "title");
     }
 
     public String getFirstName()
@@ -24,7 +26,7 @@ public class Personal
 
     public void setFirstName(String firstName)
     {
-        this.firstName = firstName;
+        this.firstName = Ensurer.ensureNonBlank(firstName, "first name");
     }
 
     public String getLastName()
@@ -34,7 +36,7 @@ public class Personal
 
     public void setLastName(String lastName)
     {
-        this.lastName = lastName;
+        this.lastName = Ensurer.ensureNonBlank(lastName, "last name");
     }
 
     public LocalDate getBirthday()
@@ -54,6 +56,6 @@ public class Personal
 
     public void setTitle(String title)
     {
-        this.title = title;
+        this.title = Ensurer.ensureNonBlank(title, "title");;
     }
 }
