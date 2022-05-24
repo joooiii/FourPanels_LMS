@@ -12,6 +12,7 @@ import static validation.Ensurer.ensureNonBlank;
 
 public class Voting
 {
+    // add Antwort als Voting...
     private String question;
     private List<Answer> answers;
     private HashMap<String, Double> results;
