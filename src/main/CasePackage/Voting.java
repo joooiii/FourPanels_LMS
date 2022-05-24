@@ -46,6 +46,11 @@ public class Voting
 
     }
 
+    public List<Answer> getAnswers()
+    {
+        return answers;
+    }
+
     public double berechneSummeResults()
     {
         double sum = 0;
@@ -70,7 +75,7 @@ public class Voting
             results.put(a.getAnswerText(), (double) 0);
 
         }
-        checkState(answers.size() < 2, "Minimum is 2 answers");
+//        checkState(answers.size() < 2, "Minimum is 2 answers");
 
     }
 
@@ -85,8 +90,8 @@ public class Voting
 
     public void voting(int answernumber)
     {
-        boolean voteOnTime = (Instant.from(endsAt)).isBefore(Instant.now());
-        if (voteOnTime)
+//        boolean voteOnTime = (Instant.from(endsAt)).isBefore(Instant.now());
+//        if (voteOnTime)
         {
       /*
                 for (Answer a : answers)
@@ -132,10 +137,10 @@ public class Voting
 
             }
         }
-        else
-        {
-            System.out.println("Sorry, u can not vote, times up...");
-        }
+//        else
+//        {
+//            System.out.println("Sorry, u can not vote, times up...");
+//        }
     }
 
     public LocalDateTime getEndsAt()
