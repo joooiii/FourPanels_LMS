@@ -61,7 +61,9 @@ public class User
 
     public void setPassword(String password)
     {
-        this.password = password;
+        if (password.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\S+$).{8,20}$"))
+            this.password = password;
+        this.updatedAt = Instant.now();
     }
 
     public Instant getCreatedAt()
