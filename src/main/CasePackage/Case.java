@@ -13,10 +13,7 @@ public class Case
     private Instant createdAt;
     private Instant updatedAt;
     private User owner;
-    private String userFirstName;
-    private String userLastName;
-    private Integer userID;
-    private HashMap<String, User> members;
+    private HashMap<Integer, User> members;
     private List<Keyword> keywords;
     private Voting voting;
     private Content content;
@@ -54,30 +51,21 @@ public class Case
         return updatedAt;
     }
 
-    public void setUpdatedAt(Instant updatedAt)
+    public void setUpdatedAt()
     {
-        this.updatedAt = Instant.now();
+        this.updatedAt = Instant.now(); 
     }
 
 // owner is unser... but we will not to get all user data, but only name, and conutry?
 //    maybe inheritange or asociation
-    public void setOwnerFirstName()
-    {
-        userFirstName=owner.getPersonal().getFirstName();
 
-    }
-
-    public void setOwnerLastName()
-    {
-        userLastName=owner.getPersonal().getLastName();
-    }
 // what are the members?
-    public HashMap<String, User> getMembers()
+    public HashMap<Integer, User> getMembers()
     {
         return members;
     }
 
-    public void setMembers(HashMap<String, User> members)
+    public void setMembers(HashMap<Integer, User> members)
     {
         this.members = members;
     }
@@ -91,7 +79,6 @@ public class Case
     public void setKeywords(List<Keyword> keywords)
     {
         this.keywords=keywords;
-
     }
 
     public Voting getVoting()
