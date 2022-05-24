@@ -53,7 +53,7 @@ public class Case
 
     public void setUpdatedAt()
     {
-        this.updatedAt = Instant.now(); 
+        this.updatedAt = Instant.now();
     }
 
 // owner is unser... but we will not to get all user data, but only name, and conutry?
