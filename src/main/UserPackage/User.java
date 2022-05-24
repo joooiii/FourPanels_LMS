@@ -12,7 +12,7 @@ import static UserPackage.Relationship.relationshipType.*;
 
 public class User
 {
-    private static final AtomicInteger count = new AtomicInteger(0)
+    private static final AtomicInteger count = new AtomicInteger(0);
     private Integer userID;
     private String eMail;
     private String password;

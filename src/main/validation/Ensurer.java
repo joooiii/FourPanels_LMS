@@ -53,7 +53,7 @@ import java.util.Objects;
                 throw new IllegalStateException(message);
         }
 
-        public static boolean isValidPassword(String pwd) {return pwd.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\S+$).{8,20}$");}
+        public static boolean isValidPassword(String pwd) {return pwd.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!§@#$%^&-+=()])(?=\\S+$).{8,20}$");}
 
         public static String ensurePasswordValid(String pwd)
         {
