@@ -2,14 +2,17 @@ package UserPackage;
 
 
 import KeywordPackage.Keyword;
+import validation.Ensurer;
 
 import java.time.Instant;
 import java.util.HashSet;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static UserPackage.Relationship.relationshipType.*;
 
 public class User
 {
+    private static final AtomicInteger count = new AtomicInteger(0);
     private Integer userID;
     private String eMail;
     private String password;
@@ -20,11 +23,11 @@ public class User
     private Score score;
     private HashSet<Keyword> keywords;
 
-    public User(Integer userID, String eMail, String password, Instant createdAt, Instant updatedAt, Personal personal, Social social, Score score)
+    public User(String eMail, String password, Instant createdAt, Instant updatedAt, Personal personal, Social social, Score score)
     {
-        this.userID = userID;
-        this.eMail = eMail;
-        this.password = password;
+        this.userID = count.incrementAndGet();
+        this.eMail = Ensurer.ensureEmailValid(eMail);
+        this.password = Ensurer.ensurePasswordValid(password);
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.personal = personal;
@@ -49,8 +52,7 @@ public class User
 
     public void seteMail(String eMail)
     {
-        if (eMail.matches("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])"))
-            this.eMail = eMail;
+        this.eMail = Ensurer.ensureEmailValid(eMail);
         this.updatedAt = Instant.now();
     }
 
@@ -61,7 +63,8 @@ public class User
 
     public void setPassword(String password)
     {
-        this.password = password;
+        this.password = Ensurer.ensurePasswordValid(password);
+        this.updatedAt = Instant.now();
     }
 
     public Instant getCreatedAt()
@@ -114,8 +117,6 @@ public class User
         this.score = score;
     }
 
-    //TODO add, remove, accept, decline
-
     // wird gehandelt durch sendRequest/acceptRequest
 //    public void addFriend(User other)
 //    {
@@ -127,42 +128,42 @@ public class User
 //
 //    }
 
-//    public void sendRequest(User other)
-//    {
-//        if (!social.getContacts().containsKey(other.getUserID())) {
-//            this.social.getContacts().put(other.getUserID(), new Relationship(outgoing));
-//            other.social.getContacts().put(this.getUserID(), new Relationship(incoming));
-//        } else
-//            System.out.println("User ist bereits befreundet");
-//    }
-//
-//    public void acceptRequest(User other)
-//    {
-//        if (social.getContacts().containsKey(other.getUserID())) {
-//            this.social.getContacts().replace(other.getUserID(), new Relationship(friended));
-//            other.social.getContacts().replace(this.getUserID(), new Relationship(friended));
-//        } else
-//            System.out.println("Es existiert kein Request");
-//    }
-//
-//    public void declineRequest(User other)
-//    {
-//        if (social.getContacts().containsKey(other.getUserID())) {
-//            this.social.getContacts().remove(other.getUserID());
-//            other.social.getContacts().remove(this.getUserID());
-//        } else
-//            System.out.println("Es existiert kein Request");
-//
-//    }
-//
-//    public void removeFriend(User other)
-//    {
-//        if (social.getContacts().containsKey(other.getUserID())) {
-//            this.social.getContacts().remove(other.getUserID());
-//            other.social.getContacts().remove(this.getUserID());
-//        } else
-//            System.out.println("User nicht befreundet");
-//
-//    }
+    public void sendRequest(User other)
+    {
+        if (!social.getContacts().containsKey(other.getUserID())) {
+            this.social.getContacts().put(other.getUserID(), new Relationship(outgoing));
+            other.social.getContacts().put(this.getUserID(), new Relationship(incoming));
+        } else
+            System.out.println("User ist bereits befreundet");
+    }
+
+    public void acceptRequest(User other)
+    {
+        if (social.getContacts().containsKey(other.getUserID())) {
+            this.social.getContacts().replace(other.getUserID(), new Relationship(friended));
+            other.social.getContacts().replace(this.getUserID(), new Relationship(friended));
+        } else
+            System.out.println("Es existiert kein Request");
+    }
+
+    public void declineRequest(User other)
+    {
+        if (social.getContacts().containsKey(other.getUserID())) {
+            this.social.getContacts().remove(other.getUserID());
+            other.social.getContacts().remove(this.getUserID());
+        } else
+            System.out.println("Es existiert kein Request");
+
+    }
+
+    public void removeFriend(User other)
+    {
+        if (social.getContacts().containsKey(other.getUserID())) {
+            this.social.getContacts().remove(other.getUserID());
+            other.social.getContacts().remove(this.getUserID());
+        } else
+            System.out.println("User nicht befreundet");
+
+    }
 }
 

@@ -12,22 +12,22 @@ import static validation.Ensurer.ensureNonBlank;
 
 public class Voting
 {
+    // add Antwort als Voting...
     private String question;
     private List<Answer> answers;
     private HashMap<String, Double> results;
-    private boolean answerType; // single choice
+
 
     private LocalDateTime endsAt;
 
 
-
-    public Voting(String question, boolean answerType, LocalDateTime endsAt)
+    public Voting(String question, LocalDateTime endsAt)
     {
-        this.question=ensureNonBlank(question, "question");
-        this.answerType=answerType;
-        this.endsAt=endsAt;
-        answers=new ArrayList<>();
-        results=new HashMap<>();
+        this.question = ensureNonBlank(question, "question");
+
+        this.endsAt = endsAt;
+        answers = new ArrayList<>();
+        results = new HashMap<>();
 
     }
 
@@ -38,7 +38,7 @@ public class Voting
 
     public void setQuestion(String question)
     {
-        this.question =ensureNonBlank(question, "question");
+        this.question = ensureNonBlank(question, "question");
     }
 
     public void setAnswers(Answer a)
@@ -47,10 +47,14 @@ public class Voting
 
     }
 
+    public List<Answer> getAnswers()
+    {
+        return answers;
+    }
 
     public double berechneSummeResults()
     {
-        double sum=0;
+        double sum = 0;
         for (double values : results.values())
         {
             sum += values;
@@ -59,7 +63,7 @@ public class Voting
 
     }
 
-    public HashMap<String,Double> getResults()
+    public HashMap<String, Double> getResults()
     {
         return results;
     }
@@ -67,24 +71,13 @@ public class Voting
     public void setHashMap()
     {
 
-      for (Answer a : answers)
+        for (Answer a : answers)
         {
             results.put(a.getAnswerText(), (double) 0);
 
         }
-      checkState(answers.size()<2, "Minimum is 2 answers");
+//        checkState(answers.size() < 2, "Minimum is 2 answers");
 
-    }
-    public void answerTypeSingleChoice(boolean answerType)
-    {
-        this.answerType=answerType;
-
-
-    }
-
-    public boolean getAnwerType()
-    {
-        return answerType;
     }
 
 
@@ -96,13 +89,12 @@ public class Voting
     }*/
 
 
-    public void voting()
+    public void voting(int answernumber)
     {
-
-        boolean voteOnTime = (Instant.from(endsAt)).isBefore(Instant.now());
-        if (voteOnTime)
+//        boolean voteOnTime = (Instant.from(endsAt)).isBefore(Instant.now());
+//        if (voteOnTime)
         {
-            if (!answerType)
+      /*
                 for (Answer a : answers)
                 {
                     System.out.println("Multiple Choice: Vote for correct answers by puting 1 if it is correct, or 0 if it's not");
@@ -119,39 +111,38 @@ public class Voting
                     results.put(a.getAnswerText(), results.get(a.getAnswerText()) + vote);
 
                 }
-            else
-            {
-                System.out.println("Singel choice: Add number of right answer.");
+            else*/
+
+            /*    System.out.println("Singel choice: Add number of right answer.");
                for(Answer a : answers)
                {
                    System.out.println(a.getAnswerID() + a.getAnswerText());;
                }
                 Scanner input = new Scanner(System.in);
 
-                int voteForKey = input.nextInt();
+                int answernumber = input.nextInt();*/
 
-                while ((voteForKey > answers.size()))
+            if ((answernumber < answers.size()))
+            {
+                for (Answer a : answers)
                 {
-                    System.out.println("U can add number betwen 0 and " + answers.size());
-                    voteForKey = input.nextInt();
-                }
-
-                for(Answer a : answers)
-                {
-                    if (voteForKey == a.getAnswerID())
+                    if (answernumber == a.getAnswerID())
                     {
-                        results.put(a.getAnswerText(), results.get(a.getAnswerText()+1));
+                        results.put(a.getAnswerText(), results.get(a.getAnswerText() + 1));
                     }
                 }
 
+            } else
+            {
+                System.out.println("U can add number betwen 0 and " + answers.size());
+
             }
         }
-        else
-        {
-            System.out.println("Sorry, u can not vote, times up...");
-        }
+//        else
+//        {
+//            System.out.println("Sorry, u can not vote, times up...");
+//        }
     }
-
 
     public LocalDateTime getEndsAt()
     {
@@ -187,6 +178,5 @@ public class Voting
         return  keys;
 
     }
-
 
 }
