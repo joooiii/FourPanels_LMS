@@ -15,19 +15,16 @@ public class Case
     private Instant updatedAt;
     private User owner;
     private HashMap<Integer, User> members;
-  //  private List<Keyword> keywords;
+    private List<Keyword> keywords;
     private Voting voting;
     private Content content;
     private static final AtomicInteger count = new AtomicInteger(0);
 
     public Case( String question, LocalDateTime endsAt)
     {
-        this.content=content;
         this.ID= count.incrementAndGet();
         this.createdAt= Instant.now();
-        this.owner= owner;
         this.voting= new Voting(question, endsAt);
-
         this.members = new HashMap<>();
         this.content=new Content();
 
@@ -81,16 +78,16 @@ public class Case
 
     }
 
-//    public List<Keyword> getKeywords()
-//    {
-//        return keywords;
-//    }
-//
-//    // wie zugreife icn im Keywords...?
-//    public void setKeywords(List<Keyword> keywords)
-//    {
-//        this.keywords=keywords;
-//    }
+    public List<Keyword> getKeywords()
+    {
+        return keywords;
+    }
+
+    // wie zugreife icn im Keywords...?
+    public void setKeywords(List<Keyword> keywords)
+    {
+        this.keywords=keywords;
+    }
 
     public Voting getVoting()
     {
