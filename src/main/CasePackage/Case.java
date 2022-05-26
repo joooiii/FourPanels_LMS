@@ -74,8 +74,7 @@ public class Case
     // list from Users...
     public void setMembers(User user)
     {
-
-
+        members.put(user.getUserID(), user);
     }
 
     public List<Keyword> getKeywords()
