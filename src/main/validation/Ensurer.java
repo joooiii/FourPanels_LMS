@@ -1,5 +1,7 @@
 package validation;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
     public abstract class Ensurer
@@ -73,6 +75,21 @@ import java.util.Objects;
                         String.format("%s ist keine gültige E-Mail-Adresse", email));
 
             return email;
+        }
+
+        public static boolean isValidEndDateTime(LocalDateTime endDateTime)
+        {
+            return Instant.now().isAfter(Instant.from(endDateTime));
+        }
+
+        public static LocalDateTime ensureValidEndDateTime(LocalDateTime endDateTime)
+        {
+            if(!isValidEndDateTime(endDateTime))
+                throw new IllegalArgumentException(
+                        String.format("%s ist kein gültige End Date/Time", endDateTime));
+
+            return endDateTime;
+
         }
     }
 

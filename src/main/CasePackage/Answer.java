@@ -34,8 +34,7 @@ public class Answer
         return answerText;
     }
 
-    public void setAnswerText
-            (String answerText)
+    public void setAnswerText(String answerText)
     {
         this.answerText =ensureNonBlank(answerText, "answer");
 

@@ -6,8 +6,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static validation.Ensurer.checkState;
-import static validation.Ensurer.ensureNonBlank;
+import static validation.Ensurer.*;
 
 
 public class Voting
@@ -24,8 +23,7 @@ public class Voting
     public Voting(String question, LocalDateTime endsAt)
     {
         this.question = ensureNonBlank(question, "question");
-
-        this.endsAt = endsAt;
+        this.endsAt = ensureValidEndDateTime(endsAt);
         answers = new ArrayList<>();
         results = new HashMap<>();
 
@@ -91,9 +89,33 @@ public class Voting
 
     public void voting(int answernumber)
     {
-//        boolean voteOnTime = (Instant.from(endsAt)).isBefore(Instant.now());
+
+            if ((answernumber < answers.size()))
+            {
+                for (Answer a : answers)
+                {
+                    if (answernumber == a.getAnswerID())
+                    {
+                        results.put(a.getAnswerText(), results.get(a.getAnswerText() + 1));
+                    }
+                }
+            }
+            if(answernumber== 0)
+            {
+                System.out.println("Add new Answer");
+                Scanner input = new Scanner(System.in);
+                String newAnswer= input.nextLine();
+                results.put(newAnswer, Double.valueOf(0));
+
+            } else
+            {
+                System.out.println("U can add number betwen 0 and " + answers.size());
+
+            }
+        }
+    //        boolean voteOnTime = (Instant.from(endsAt)).isBefore(Instant.now());
 //        if (voteOnTime)
-        {
+    {
       /*
                 for (Answer a : answers)
                 {
@@ -121,23 +143,6 @@ public class Voting
                 Scanner input = new Scanner(System.in);
 
                 int answernumber = input.nextInt();*/
-
-            if ((answernumber < answers.size()))
-            {
-                for (Answer a : answers)
-                {
-                    if (answernumber == a.getAnswerID())
-                    {
-                        results.put(a.getAnswerText(), results.get(a.getAnswerText() + 1));
-                    }
-                }
-
-            } else
-            {
-                System.out.println("U can add number betwen 0 and " + answers.size());
-
-            }
-        }
 //        else
 //        {
 //            System.out.println("Sorry, u can not vote, times up...");

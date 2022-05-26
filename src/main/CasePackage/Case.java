@@ -4,6 +4,7 @@ import KeywordPackage.Keyword;
 import UserPackage.User;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -19,10 +20,15 @@ public class Case
     private Content content;
     private static final AtomicInteger count = new AtomicInteger(0);
 
-//    public Case()
-//    {
-//
-//    }
+    public Case( String question, LocalDateTime endsAt)
+    {
+        this.ID= count.incrementAndGet();
+        this.createdAt= Instant.now();
+        this.voting= new Voting(question, endsAt);
+        this.members = new HashMap<>();
+        this.content=new Content();
+
+    }
 
     public Integer getID()
 
@@ -65,9 +71,11 @@ public class Case
         return members;
     }
 
-    public void setMembers(HashMap<Integer, User> members)
+    // list from Users...
+    public void setMembers(User user)
     {
-        this.members = members;
+
+
     }
 
     public List<Keyword> getKeywords()
