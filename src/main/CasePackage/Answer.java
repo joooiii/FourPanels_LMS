@@ -16,6 +16,7 @@ public class Answer
     {
         this.answerText=ensureNonBlank(answerText,"answer");
         this.answerID=count.incrementAndGet();
+
     }
 
     public Integer getAnswerID()
