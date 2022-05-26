@@ -157,7 +157,7 @@ public class Keyword
     }
 
 
-    public enum Languag
+    public enum Language
     {
         DANISH,
         CHINESE,
