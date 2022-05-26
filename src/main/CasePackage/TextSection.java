@@ -16,9 +16,9 @@ public class TextSection extends Section
     {
         Scanner scanner = new Scanner(System.in);
         while (true){
-            String s = scanner.next();
-            if(s.equals("q")) break;
-            return s;
+            text = scanner.next();
+            if(text.equals("q")) break;
+            return text;
         }
         scanner.close();
         return "end of Text Section";

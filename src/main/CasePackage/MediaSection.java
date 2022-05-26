@@ -7,12 +7,12 @@ import java.nio.file.Path;
 
 public class MediaSection extends Section
 {
-    private String mimeTypes;
+    private String mimeType;
 
-    public MediaSection(String mimeTypes)
+    public MediaSection(String mimeType)
     {
         super();
-        this.mimeTypes = mimeTypes;
+        this.mimeType = mimeType;
     }
 
     public String addNewFile(String fileName)
@@ -20,7 +20,7 @@ public class MediaSection extends Section
         Path path = new File(fileName).toPath();
         try
         {
-            String mimeType = Files.probeContentType(path);
+            mimeType = Files.probeContentType(path);
             return mimeType;
         } catch (IOException e)
         {
