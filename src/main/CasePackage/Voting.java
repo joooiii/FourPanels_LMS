@@ -15,10 +15,7 @@ public class Voting
     private String question;
     private List<Answer> answers;
     private HashMap<String, Double> results;
-
-
     private LocalDateTime endsAt;
-
 
     public Voting(String question, LocalDateTime endsAt)
     {
@@ -42,9 +39,13 @@ public class Voting
     public void setAnswers(Answer a)
     {
         answers.add(a);
+        for (Answer ans : answers)
+        {
+            results.put(ans.getAnswerText(), 0.0);
+
+        }
 
     }
-
     public List<Answer> getAnswers()
     {
         return answers;
@@ -66,18 +67,6 @@ public class Voting
         return results;
     }
 
-    public void setHashMap()
-    {
-
-        for (Answer a : answers)
-        {
-            results.put(a.getAnswerText(), (double) 0);
-
-        }
-//        checkState(answers.size() < 2, "Minimum is 2 answers");
-
-    }
-
 
     // how to make 1 user to vote...
    /* public void userThatVotet()
@@ -86,36 +75,40 @@ public class Voting
 
     }*/
 
-
     public void voting(int answernumber)
     {
+        boolean voteOnTime = (endsAt.isAfter(LocalDateTime.now()));
+         if (voteOnTime)
+         {
+             if ((answernumber < answers.size()))
+             {
+                 for (Answer a : answers)
+                 {
+                     if (answernumber == a.getAnswerID())
+                     {
+                         results.put(a.getAnswerText(), results.get(a.getAnswerText()) + 1);
+                     }
+                 }
 
-            if ((answernumber < answers.size()))
-            {
-                for (Answer a : answers)
-                {
-                    if (answernumber == a.getAnswerID())
-                    {
-                        results.put(a.getAnswerText(), results.get(a.getAnswerText() + 1));
-                    }
-                }
-            }
-            if(answernumber== 0)
-            {
-                System.out.println("Add new Answer");
-                Scanner input = new Scanner(System.in);
-                String newAnswer= input.nextLine();
-                results.put(newAnswer, Double.valueOf(0));
+                 if (answernumber == 0)
+                 {
+                     System.out.println("Add new Answer");
+                     Scanner input = new Scanner(System.in);
+                     String newAnswer = input.nextLine();
+                     results.put(newAnswer, 1.0);
+                 }
+             } else
+             {
+                 System.out.println("U can add number betwen 0 and " + answers.size());
 
-            } else
-            {
-                System.out.println("U can add number betwen 0 and " + answers.size());
+             }
+         }
+         else
+         {
+             System.out.println("U are too late for vote");
+         }
 
-            }
-        }
-    //        boolean voteOnTime = (Instant.from(endsAt)).isBefore(Instant.now());
-//        if (voteOnTime)
-    {
+
       /*
                 for (Answer a : answers)
                 {
@@ -156,20 +149,10 @@ public class Voting
 
     public void setEndsAt(LocalDateTime endsAt)
     {
-        this.endsAt = endsAt;
+        this.endsAt = ensureValidEndDateTime(endsAt);
     }
 // need to chek it...
-    public void corectAnswers()
-    {
-        Double max = Collections.max(results.values());
-
-        results.entrySet().stream().filter(results -> results.getValue() == max)
-                .map(entry -> entry.getKey())
-                .collect(Collectors.toList());
-
-    }
-
-    public List<String> corectAnswers2()
+    public List<String> corectAnswer()
     {
         Double max = Collections.max(results.values());
         List<String> keys = new ArrayList<>();
@@ -182,6 +165,16 @@ public class Voting
         }
         return  keys;
 
+    }
+
+    public void corectAnswersList()
+    {
+        for (Map.Entry result : results.entrySet())
+        {
+            String key= (String)result.getKey();
+             double value = (double) result.getValue() *100/ berechneSummeResults() ;
+            System.out.println(key +": " + value + "%");
+        }
     }
 
 }
