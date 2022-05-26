@@ -79,7 +79,7 @@ import java.util.Objects;
 
         public static boolean isValidEndDateTime(LocalDateTime endDateTime)
         {
-            return Instant.now().isAfter(Instant.from(endDateTime));
+            return LocalDateTime.now().isBefore(endDateTime);
         }
 
         public static LocalDateTime ensureValidEndDateTime(LocalDateTime endDateTime)
