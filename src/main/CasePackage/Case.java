@@ -26,7 +26,6 @@ public class Case
         this.createdAt= Instant.now();
         this.voting= new Voting(question, endsAt);
         this.members = new HashMap<>();
-        this.content=new Content();
 
     }
 
