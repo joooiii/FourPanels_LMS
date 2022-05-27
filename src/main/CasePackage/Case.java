@@ -15,7 +15,8 @@ public class Case
     private Instant updatedAt;
     private User owner;
     private HashMap<Integer, User> members;
-    private List<Keyword> keywords;
+    private List<Keyword.Symptom> symptoms;
+    private List<Keyword.Procedure> procedures;
     private Voting voting;
     private Content content;
     private static final AtomicInteger count = new AtomicInteger(0);
@@ -26,6 +27,8 @@ public class Case
         this.createdAt= Instant.now();
         this.voting= new Voting(question, endsAt);
         this.members = new HashMap<>();
+        this.symptoms = new ArrayList<Keyword.Symptom>();
+        this.procedures=new ArrayList<Keyword.Procedure>();
 
     }
 
@@ -61,8 +64,7 @@ public class Case
         this.updatedAt = Instant.now();
     }
 
-// owner is unser... but we will not to get all user data, but only name, and conutry?
-//    maybe inheritange or asociation
+
 
 // what are the members?
     public HashMap<Integer, User> getMembers()
@@ -76,15 +78,25 @@ public class Case
         members.put(user.getUserID(), user);
     }
 
-    public List<Keyword> getKeywords()
+    public List<Keyword.Symptom> getKeywordsSymptoms()
     {
-        return keywords;
+        return symptoms;
+    }
+
+    public List<Keyword.Procedure> getKeywordsProcedure()
+    {
+        return procedures;
     }
 
     // wie zugreife icn im Keywords...?
-    public void setKeywords(List<Keyword> keywords)
+    public void setKeywordsProcedure(Keyword.Procedure keyword)
     {
-        this.keywords=keywords;
+        procedures.add(keyword);
+    }
+
+    public void setKeywordsSymptoms(Keyword.Symptom keyword)
+    {
+        symptoms.add(keyword);
     }
 
     public Voting getVoting()
@@ -106,4 +118,5 @@ public class Case
     {
         this.content = content;
     }
+
 }
