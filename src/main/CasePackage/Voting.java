@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 
 import static validation.Ensurer.*;
 
-
 public class Voting
 {
     // add Antwort als Voting...
