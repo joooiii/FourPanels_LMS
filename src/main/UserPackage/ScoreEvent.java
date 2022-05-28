@@ -2,21 +2,22 @@ package UserPackage;
 
 import validation.Ensurer;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class ScoreEvent
 {
     private int point;
-    private LocalDateTime time;
-    private String type;
+    private LocalDate date;
+    private boolean expert;
     private String scoreMessage;
     private String title;
 
-    public ScoreEvent(int point, LocalDateTime time, String type, String scoreMessage, String title)
+    public ScoreEvent(int point, LocalDate date, boolean expert, String scoreMessage, String title)
     {
         this.point = Ensurer.ensureValueInRangeInt(point,5,250, "points");
-        this.time = time;
-        this.type = Ensurer.ensureNonBlank(type,"Type");
+        this.date = date;
+        this.expert = expert;
         this.scoreMessage = Ensurer.ensureNonBlank(scoreMessage, "Score Message");
         this.title = Ensurer.ensureNonBlank(title, "Title");
     }
@@ -26,14 +27,14 @@ public class ScoreEvent
         return point;
     }
 
-    public LocalDateTime getTime()
+    public LocalDate getDate()
     {
-        return time;
+        return date;
     }
 
-    public String getType()
+    public boolean isExpert()
     {
-        return type;
+        return expert;
     }
 
     public String getScoreMessage()
@@ -44,6 +45,12 @@ public class ScoreEvent
     public String getTitle()
     {
         return title;
+    }
+
+    @Override
+    public String toString()
+    {
+        return title + "\n" + date + "Punkte: " + getPoint() + "\n" + scoreMessage + "\n";
     }
 
 }
