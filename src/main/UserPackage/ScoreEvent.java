@@ -1,5 +1,7 @@
 package UserPackage;
 
+import validation.Ensurer;
+
 import java.time.LocalDateTime;
 
 public class ScoreEvent
@@ -12,11 +14,11 @@ public class ScoreEvent
 
     public ScoreEvent(int point, LocalDateTime time, String type, String scoreMessage, String title)
     {
-        this.point = point;
+        this.point = Ensurer.ensureValueInRangeInt(point,5,250, "points");
         this.time = time;
-        this.type = type;
-        this.scoreMessage = scoreMessage;
-        this.title = title;
+        this.type = Ensurer.ensureNonBlank(type,"Type");
+        this.scoreMessage = Ensurer.ensureNonBlank(scoreMessage, "Score Message");
+        this.title = Ensurer.ensureNonBlank(title, "Title");
     }
 
     public int getPoint()
@@ -24,19 +26,9 @@ public class ScoreEvent
         return point;
     }
 
-    public void setPoint(int point)
-    {
-        this.point = point;
-    }
-
     public LocalDateTime getTime()
     {
         return time;
-    }
-
-    public void setTime(LocalDateTime time)
-    {
-        this.time = time;
     }
 
     public String getType()
@@ -44,19 +36,9 @@ public class ScoreEvent
         return type;
     }
 
-    public void setType(String type)
-    {
-        this.type = type;
-    }
-
     public String getScoreMessage()
     {
         return scoreMessage;
-    }
-
-    public void setScoreMessage(String scoreMessage)
-    {
-        this.scoreMessage = scoreMessage;
     }
 
     public String getTitle()
@@ -64,8 +46,4 @@ public class ScoreEvent
         return title;
     }
 
-    public void setTitle(String title)
-    {
-        this.title = title;
-    }
 }
