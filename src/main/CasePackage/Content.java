@@ -10,9 +10,9 @@ public class Content
     private String title;
     private List<Section> sections;
 
-    public Content()
+    public Content(String title)
     {
-
+        this.title=title;
     }
 
     public void addKeywords()

@@ -6,22 +6,19 @@ public class TextSection extends Section
 {
     private String text;
 
-    public TextSection(String text)
+    public TextSection()
     {
-        this.text = text;
+        this.text = addText();
     }
 
 
     public String addText()
     {
         Scanner scanner = new Scanner(System.in);
-        while (true){
-            text = scanner.next();
-            if(text.equals("q")) break;
-            return text;
-        }
+        System.out.println("Emter your Text");
+        text = scanner.next();
         scanner.close();
-        return "end of Text Section";
+        return text;
     }
 
 }

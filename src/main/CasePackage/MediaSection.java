@@ -1,4 +1,5 @@
 package CasePackage;
+import validation.Ensurer;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,12 +12,12 @@ public class MediaSection extends Section
 
     public MediaSection(String mimeType)
     {
-        super();
-        this.mimeType = mimeType;
+        this.mimeType = addNewFile(mimeType);
     }
 
     public String addNewFile(String fileName)
     {
+        Ensurer.ensureNonBlank(fileName, "File Name");
         Path path = new File(fileName).toPath();
         try
         {
@@ -28,6 +29,8 @@ public class MediaSection extends Section
             return "file type not valid";
         }
     }
+
+
 
 
 
