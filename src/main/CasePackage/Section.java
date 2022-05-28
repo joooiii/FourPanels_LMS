@@ -1,50 +1,51 @@
 package CasePackage;
 
+import validation.Ensurer;
+
 public class Section
 {
-    private TextSection text;
-    private MediaSection media;
+    private String secTitle;
 
 
-    public Section()
+    public Section(String secTitle)
     {
-
+        this.secTitle = Ensurer.ensureNonBlank(secTitle, "Title of section");
     }
 
-    public void addTextAndMedia(String media)
+//    public void addTextAndMedia(String media)
+//    {
+//        text.addText();
+//        this.media.addNewFile(media);
+//    }
+//
+//    public void addTextSection()
+//    {
+//        text.addText();
+//    }
+//
+//    public void addMediaSection(String media)
+//    {
+//        this.media.addNewFile(media);
+//    }
+
+
+    public String getSecTitle()
     {
-        text.addText();
-        this.media.addNewFile(media);
+        return secTitle;
     }
 
-    public void addTextSection()
+    public void setSecTitle(String secTitle)
     {
-        text.addText();
+        this.secTitle = Ensurer.ensureNonBlank(secTitle, "section Title");
     }
 
-    public void addMediaSection(String media)
+    @Override
+    public String toString()
     {
-        this.media.addNewFile(media);
+        return secTitle;
     }
 
 
-    public TextSection getText()
-    {
-        return text;
-    }
 
-    public void setText(TextSection text)
-    {
-        this.text = text;
-    }
 
-    public MediaSection getMedia()
-    {
-        return media;
-    }
-
-    public void setMedia(MediaSection media)
-    {
-        this.media = media;
-    }
 }

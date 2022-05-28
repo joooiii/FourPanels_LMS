@@ -8,10 +8,12 @@ import java.nio.file.Path;
 
 public class MediaSection extends Section
 {
+
     private String mimeType;
 
-    public MediaSection(String mimeType)
+    public MediaSection(String mimeType, String title)
     {
+        super(title);
         this.mimeType = addNewFile(mimeType);
     }
 
@@ -28,11 +30,14 @@ public class MediaSection extends Section
             e.printStackTrace();
             return "file type not valid";
         }
+
+
     }
 
-
-
-
-
+    @Override
+    public String toString()
+    {
+        return super.toString() + "\n" + mimeType;
+    }
 
 }
