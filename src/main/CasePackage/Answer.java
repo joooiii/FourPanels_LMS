@@ -9,7 +9,6 @@ public class Answer
     private Integer answerID;
     private String answerText;
     private static final AtomicInteger count = new AtomicInteger(0);
-    private boolean answerType;
 
 
     public Answer(String answerText)
