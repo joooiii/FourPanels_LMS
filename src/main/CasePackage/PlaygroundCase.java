@@ -12,30 +12,38 @@ public class PlaygroundCase
 
     public static void main(String[] arg)
     {
-        Case case1= new Case("pfui");
+        Case case1= new Case("Back pain");
+
        case1.setKeywordsProcedure(Keyword.Procedure.BIOTIN_ERGAENZUNG);
        case1.setKeywordsProcedure(Keyword.Procedure.BURCH_VERFAHREN);
        case1.setKeywordsSymptoms(Keyword.Symptom.BIOSPSIE_DES_OMENTUMS);
        case1.setKeywordsSymptoms(Keyword.Symptom.BILIRUBIN_IM_BLUT_DIREKT_ERNIEDRIGT);
+       case1.setKeywordProfesions(Keyword.Profession.ANAESTHESIOLOGIE);
+       case1.setKeywordProfesions(Keyword.Profession.CHIRUGIE);
+
+        Voting voting= new Voting("Is it for OP?", LocalDateTime.now().plus(1,ChronoUnit.DAYS));
+        
+        System.out.println(case1.getContent().getTitle());
+        System.out.println(voting.getQuestion());
         System.out.println(case1.getKeywordsProcedure());
         System.out.println(case1.getKeywordsSymptoms());
+        System.out.println(case1.getKeywordsProfession());
+
         Answer a= new Answer("Yes");
         Answer b= new Answer("NO");
         Answer c= new Answer("Egal");
-        System.out.println(case1.getCreatedAt());
-        Voting voting= new Voting("Is it for OP", LocalDateTime.now().plus(1,ChronoUnit.DAYS));
         voting.setAnswers(a);
         voting.setAnswers(b);
         voting.setAnswers(c);
-        System.out.println(voting.getAnswers().size());
-        voting.voting(1);
-        voting.voting(1);
-        voting.voting(2);
-        voting.voting(1);
-        voting.voting(0);
+        voting.voting(1,1, case1);
+        voting.voting(1,2, case1);
+        voting.voting(2,3, case1);
+        voting.voting(1,1, case1);
+        voting.voting(0, 1, case1);
         System.out.println(voting.getResults());
         System.out.println("Votet " + voting.berechneSummeResults() + " People");
         System.out.println("Maximum votes have answer: " + voting.corectAnswer());
         voting.corectAnswersList();
+
     }
 }
