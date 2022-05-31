@@ -57,22 +57,23 @@ public class Voting
         return answers;
     }
 
-    public double berechneSummeResults()
-    {
-        double sum = 0;
-        for (double values : results.values())
-        {
-            sum += values;
-        }
-        return sum;
-
-    }
 
     public HashMap<String, Double> getResults()
+
     {
         return results;
     }
 
+
+    public LocalDateTime getEndsAt()
+    {
+        return endsAt;
+    }
+
+    public void setEndsAt(LocalDateTime endsAt)
+    {
+        this.endsAt = ensureValidEndDateTime(endsAt);
+    }
 
     // how to make 1 user to vote...
    /* public void userThatVotet()
@@ -118,14 +119,17 @@ public class Voting
         }
 
 
-    public LocalDateTime getEndsAt()
-    {
-        return endsAt;
-    }
 
-    public void setEndsAt(LocalDateTime endsAt)
+
+    public double berechneSummeResults()
     {
-        this.endsAt = ensureValidEndDateTime(endsAt);
+        double sum = 0;
+        for (double values : results.values())
+        {
+            sum += values;
+        }
+        return sum;
+
     }
 
     public List<String> corectAnswer()
@@ -141,6 +145,17 @@ public class Voting
         }
         return  keys;
     }
+
+    public void corectAnswersList()
+    {
+        for (Map.Entry result : results.entrySet())
+        {
+            String key= (String)result.getKey();
+             double value = (double) result.getValue() *100/ berechneSummeResults() ;
+            System.out.println(key +": " + value + "%");
+        }
+    }
+
     // Uberprufen ob dass stimmt
     public void addScoreForRightAnswer()
     {
@@ -152,16 +167,6 @@ public class Voting
             }
         }
 
-    }
-
-    public void corectAnswersList()
-    {
-        for (Map.Entry result : results.entrySet())
-        {
-            String key= (String)result.getKey();
-             double value = (double) result.getValue() *100/ berechneSummeResults() ;
-            System.out.println(key +": " + value + "%");
-        }
     }
 
 }
