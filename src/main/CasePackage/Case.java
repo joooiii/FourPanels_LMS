@@ -21,8 +21,9 @@ public class Case
     private Content content;
     private static final AtomicInteger count = new AtomicInteger(0);
 
-    public Case( )
+    public Case(String title)
     {
+        this.content= new Content(title);
         this.ID= count.incrementAndGet();
         this.createdAt= Instant.now();
         this.members = new HashMap<>();
@@ -63,7 +64,11 @@ public class Case
         this.updatedAt = Instant.now();
     }
 
-
+    //TODO put members
+    public void addMember(Integer i, User user)
+    {
+        members.put(i,user);
+    }
 
 // what are the members?
     public HashMap<Integer, User> getMembers()

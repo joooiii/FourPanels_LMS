@@ -13,10 +13,10 @@ public class ScoreEvent
     private String scoreMessage;
     private String title;
 
-    public ScoreEvent(int point, LocalDate date, boolean expert, String scoreMessage, String title)
+    public ScoreEvent(int point, boolean expert, String scoreMessage, String title)
     {
         this.point = Ensurer.ensureValueInRangeInt(point,5,250, "points");
-        this.date = date;
+        this.date = LocalDate.now();
         this.expert = expert;
         this.scoreMessage = Ensurer.ensureNonBlank(scoreMessage, "Score Message");
         this.title = Ensurer.ensureNonBlank(title, "Title");
