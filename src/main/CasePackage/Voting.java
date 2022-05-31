@@ -28,6 +28,7 @@ public class Voting
         this.endsAt = ensureValidEndDateTime(endsAt);
         answers = new ArrayList<>();
         results = new HashMap<>();
+        votedUsers=new HashMap<>();
 
     }
 
@@ -82,15 +83,16 @@ public class Voting
 
     public void voting( Integer userId, int answernumber, Case cases)
     {
+        // If voting is before endTime
         boolean voteOnTime = (endsAt.isAfter(LocalDateTime.now()));
-        if (cases.getMembers().containsKey(userId))
-        {
-            if (!votedUsers.containsKey(userId))
-            {
+        // Is User memeber
+        checkState(cases.getMembers().containsKey(userId), "U are not member");
+        // Is User alredy voted
+        checkState(!votedUsers.containsKey(userId), "U have alredy voted");
                 if (voteOnTime)
                 {
-                    if ((answernumber < answers.size()))
-                    {
+                    checkState(!(answernumber >answers.size()),"U can vote from 0 to" + answers.size());
+
                         for (Answer a : answers)
                         {
                             if (answernumber == a.getAnswerID())
@@ -98,7 +100,6 @@ public class Voting
                                 results.put(a.getAnswerText(), results.get(a.getAnswerText()) + 1);
                             }
                         }
-
                         if (answernumber == 0)
                         {
                             System.out.println("Add new Answer");
@@ -110,57 +111,12 @@ public class Voting
                             this.scoreEvent= new ScoreEvent(5,false, "Score Message", "title");
 
                         }
-                    } else
-                    {
-                        System.out.println("U can add number betwen 0 and " + answers.size());
-                    }
                 } else
                 {
                     System.out.println("U are too late for vote");
                 }
-            } else
-            {
-                System.out.println("U have alredy voted");
-            }
         }
-        else
-            {
-                System.out.println("U are not member");
-            }
 
-
-      /*
-                for (Answer a : answers)
-                {
-                    System.out.println("Multiple Choice: Vote for correct answers by puting 1 if it is correct, or 0 if it's not");
-                    System.out.println(results);
-                    Scanner input = new Scanner(System.in);
-
-                    double vote = input.nextDouble();
-                    while (vote != 0 || vote != 1)
-                    {
-                        System.out.println("You can vote only with 1 or 0");
-                        vote = input.nextDouble();
-                    }
-
-                    results.put(a.getAnswerText(), results.get(a.getAnswerText()) + vote);
-
-                }
-            else*/
-
-            /*    System.out.println("Singel choice: Add number of right answer.");
-               for(Answer a : answers)
-               {
-                   System.out.println(a.getAnswerID() + a.getAnswerText());;
-               }
-                Scanner input = new Scanner(System.in);
-
-                int answernumber = input.nextInt();*/
-//        else
-//        {
-//            System.out.println("Sorry, u can not vote, times up...");
-//        }
-    }
 
     public LocalDateTime getEndsAt()
     {
@@ -184,12 +140,11 @@ public class Voting
             }
         }
         return  keys;
-
     }
-
+    // Uberprufen ob dass stimmt
     public void addScoreForRightAnswer()
     {
-        if (votedUsers.containsKey(answers.indexOf(corectAnswer())))
+        if (votedUsers.containsValue(answers.indexOf(corectAnswer())))
         {
             if (endsAt.isAfter(LocalDateTime.now()))
             {
