@@ -17,6 +17,7 @@ public class Case
     private HashMap<Integer, User> members;
     private List<Keyword.Symptom> symptoms;
     private List<Keyword.Procedure> procedures;
+    private List<Keyword.Profession> professions;
     private Voting voting;
     private Content content;
     private static final AtomicInteger count = new AtomicInteger(0);
@@ -29,6 +30,7 @@ public class Case
         this.members = new HashMap<>();
         this.symptoms = new ArrayList<Keyword.Symptom>();
         this.procedures=new ArrayList<Keyword.Procedure>();
+        this.professions=new ArrayList<Keyword.Profession>();
 
     }
 
@@ -92,6 +94,11 @@ public class Case
         return procedures;
     }
 
+
+    public List<Keyword.Profession> getKeywordsProfession()
+    {
+        return professions;
+    }
     // wie zugreife icn im Keywords...?
     public void setKeywordsProcedure(Keyword.Procedure keyword)
     {
@@ -101,6 +108,10 @@ public class Case
     public void setKeywordsSymptoms(Keyword.Symptom keyword)
     {
         symptoms.add(keyword);
+    }
+    public void setKeywordProfesions(Keyword.Profession keyword)
+    {
+        professions.add(keyword);
     }
 
     public Voting getVoting()
