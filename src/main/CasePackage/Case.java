@@ -21,11 +21,10 @@ public class Case
     private Content content;
     private static final AtomicInteger count = new AtomicInteger(0);
 
-    public Case( String question, LocalDateTime endsAt)
+    public Case( )
     {
         this.ID= count.incrementAndGet();
         this.createdAt= Instant.now();
-        this.voting= new Voting(question, endsAt);
         this.members = new HashMap<>();
         this.symptoms = new ArrayList<Keyword.Symptom>();
         this.procedures=new ArrayList<Keyword.Procedure>();
