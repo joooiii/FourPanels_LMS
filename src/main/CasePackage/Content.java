@@ -17,7 +17,7 @@ public class Content
         this.title=title;
         this.sections=new ArrayList<>();
     }
-
+//ToDO nru media geht nicht
     public String getTitle()
     {
         return title;

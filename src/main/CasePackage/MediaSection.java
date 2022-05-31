@@ -10,25 +10,28 @@ public class MediaSection extends Section
 {
 
     private String mimeType;
+    private Path path;
 
-    public MediaSection(String mimeType, String title)
+    public MediaSection(Path path, String title)
     {
+
         super(title);
-        this.mimeType = addNewFile(mimeType);
+        this.path = Path.of(addNewFile(path));
+
     }
 
-    public String addNewFile(String fileName)
+    public String addNewFile(Path path)
     {
-        Ensurer.ensureNonBlank(fileName, "File Name");
-        Path path = new File(fileName).toPath();
+        Ensurer.ensureNonBlank(path.toString(), "Path");
+
         try
         {
             mimeType = Files.probeContentType(path);
-            return mimeType;
+            return path.toString();
         } catch (IOException e)
         {
             e.printStackTrace();
-            return "file type not valid";
+            throw new IllegalArgumentException("Help");
         }
 
 
@@ -37,7 +40,7 @@ public class MediaSection extends Section
     @Override
     public String toString()
     {
-        return super.toString() + "\n" + mimeType;
+        return super.toString() + "\n" + "Pfad: "+ path.toString()+ "\nMimeType: " + mimeType;
     }
 
 }

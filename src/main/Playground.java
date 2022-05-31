@@ -7,6 +7,8 @@ import UserPackage.ScoreEvent;
 import jdk.swing.interop.SwingInterOpUtils;
 import org.w3c.dom.Text;
 
+import java.nio.file.Paths;
+
 public class Playground
 {
 
@@ -14,17 +16,18 @@ public class Playground
     public static void main(String[] args)
     {
 //
-
-//        TextSection txt = new TextSection("Mein Patient hört nicht auf aus seinen Ohren zu bluten Hilfeee!!! ", "OhrenBluten");
-//        Content con = new Content("AUA");
-//        TextSection txt2= new TextSection("Wenn er seinen Kopf bewegt fangt es wieder zum Bluten an auch wenn ich die Wunde schon zugenäht habe", "help");
+        MediaSection med = new MediaSection(Paths.get("c:\\user\\help.txt"), "lululul");
+        TextSection txt = new TextSection("Mein Patient hört nicht auf aus seinen Ohren zu bluten Hilfeee!!! ", "OhrenBluten");
+        Content con = new Content("AUA");
+        TextSection txt2= new TextSection("Wenn er seinen Kopf bewegt fangt es wieder zum Bluten an auch wenn ich die Wunde schon zugenäht habe", "help");
 //        txt2.addToExcistingSection();
-//        con.addSection(txt);
-//        con.addSection(txt2);
+        con.addSection(txt);
+
+        con.addSection(txt2);
 //
+          con.addSection(med);
 //
-//
-//        System.out.println(con.toString());
+        System.out.println(con.toString());
 
 //        ScoreEvent sorc = new ScoreEvent(10,'2022-05-25',false,"You voted!", "Points" );
 
