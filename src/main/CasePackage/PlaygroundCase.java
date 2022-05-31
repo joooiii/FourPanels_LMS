@@ -22,7 +22,7 @@ public class PlaygroundCase
        case1.setKeywordProfesions(Keyword.Profession.CHIRUGIE);
 
         Voting voting= new Voting("Is it for OP?", LocalDateTime.now().plus(1,ChronoUnit.DAYS));
-        
+
         System.out.println(case1.getContent().getTitle());
         System.out.println(voting.getQuestion());
         System.out.println(case1.getKeywordsProcedure());
