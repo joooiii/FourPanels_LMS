@@ -1,5 +1,8 @@
 package CasePackage;
 
+import UserPackage.ScoreEvent;
+import validation.Ensurer;
+
 import javax.swing.*;
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -15,6 +18,9 @@ public class Voting
     private List<Answer> answers;
     private HashMap<String, Double> results;
     private LocalDateTime endsAt;
+    private HashMap<Integer, Integer> votedUsers; // key is User ID und value is die Antwort
+    private Case cases;
+    ScoreEvent scoreEvent;
 
     public Voting(String question, LocalDateTime endsAt)
     {
@@ -74,38 +80,53 @@ public class Voting
 
     }*/
 
-    public void voting(int answernumber)
+    public void voting( Integer userId, int answernumber, Case cases)
     {
         boolean voteOnTime = (endsAt.isAfter(LocalDateTime.now()));
-         if (voteOnTime)
-         {
-             if ((answernumber < answers.size()))
-             {
-                 for (Answer a : answers)
-                 {
-                     if (answernumber == a.getAnswerID())
-                     {
-                         results.put(a.getAnswerText(), results.get(a.getAnswerText()) + 1);
-                     }
-                 }
+        if (cases.getMembers().containsKey(userId))
+        {
+            if (!votedUsers.containsKey(userId))
+            {
+                if (voteOnTime)
+                {
+                    if ((answernumber < answers.size()))
+                    {
+                        for (Answer a : answers)
+                        {
+                            if (answernumber == a.getAnswerID())
+                            {
+                                results.put(a.getAnswerText(), results.get(a.getAnswerText()) + 1);
+                            }
+                        }
 
-                 if (answernumber == 0)
-                 {
-                     System.out.println("Add new Answer");
-                     Scanner input = new Scanner(System.in);
-                     String newAnswer = input.nextLine();
-                     results.put(newAnswer, 1.0);
-                 }
-             } else
-             {
-                 System.out.println("U can add number betwen 0 and " + answers.size());
+                        if (answernumber == 0)
+                        {
+                            System.out.println("Add new Answer");
+                            Scanner input = new Scanner(System.in);
+                            String newAnswer = input.nextLine();
+                            results.put(newAnswer, 1.0);
+                            votedUsers.put(userId,answernumber);
+                            // to hom user is dises score gegeben?
+                            this.scoreEvent= new ScoreEvent(5,false, "Score Message", "title");
 
-             }
-         }
-         else
-         {
-             System.out.println("U are too late for vote");
-         }
+                        }
+                    } else
+                    {
+                        System.out.println("U can add number betwen 0 and " + answers.size());
+                    }
+                } else
+                {
+                    System.out.println("U are too late for vote");
+                }
+            } else
+            {
+                System.out.println("U have alredy voted");
+            }
+        }
+        else
+            {
+                System.out.println("U are not member");
+            }
 
 
       /*
@@ -150,7 +171,7 @@ public class Voting
     {
         this.endsAt = ensureValidEndDateTime(endsAt);
     }
-// need to chek it...
+
     public List<String> corectAnswer()
     {
         Double max = Collections.max(results.values());
@@ -163,6 +184,18 @@ public class Voting
             }
         }
         return  keys;
+
+    }
+
+    public void addScoreForRightAnswer()
+    {
+        if (votedUsers.containsKey(answers.indexOf(corectAnswer())))
+        {
+            if (endsAt.isAfter(LocalDateTime.now()))
+            {
+                this.scoreEvent = new ScoreEvent(5, false, "Score Message", "title");
+            }
+        }
 
     }
 
