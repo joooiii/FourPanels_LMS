@@ -12,7 +12,7 @@ public class PlaygroundCase
 
     public static void main(String[] arg)
     {
-        Case case1= new Case("Is it for OP", LocalDateTime.now().plus(1,ChronoUnit.DAYS));
+        Case case1= new Case();
        case1.setKeywordsProcedure(Keyword.Procedure.BIOTIN_ERGAENZUNG);
        case1.setKeywordsProcedure(Keyword.Procedure.BURCH_VERFAHREN);
        case1.setKeywordsSymptoms(Keyword.Symptom.BIOSPSIE_DES_OMENTUMS);
