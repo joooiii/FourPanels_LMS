@@ -134,4 +134,17 @@ public class Case
         this.content = content;
     }
 
+
+    public String toString()
+    {
+        return "Title: " + content.getTitle() +"\n"
+               + "-".repeat(20) + "\n" +
+                getKeywordsProcedure() + "\n"+
+                getKeywordsSymptoms() + "\n"+
+                getKeywordsProfession() +"\n" +
+                 "-".repeat(20);
+
+
+
+    }
 }
