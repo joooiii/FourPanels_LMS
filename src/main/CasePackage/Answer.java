@@ -10,7 +10,6 @@ public class Answer
     private String answerText;
     private static final AtomicInteger count = new AtomicInteger(0);
 
-
     public Answer(String answerText)
     {
         this.answerText=ensureNonBlank(answerText,"answer");
