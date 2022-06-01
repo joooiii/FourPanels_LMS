@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static UserPackage.Relationship.relationshipType.*;
-
+// User classe
 public class User
 {
     private static final AtomicInteger count = new AtomicInteger(0);
