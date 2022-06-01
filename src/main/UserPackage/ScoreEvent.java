@@ -5,7 +5,7 @@ import validation.Ensurer;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class ScoreEvent
+public class ScoreEvent extends Score
 {
     private int point;
     private LocalDate date;
