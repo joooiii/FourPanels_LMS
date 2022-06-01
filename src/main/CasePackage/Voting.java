@@ -181,7 +181,6 @@ public class Voting
                     {
                         if ((int)votedUser.getValue() == answerNumber)
                         {
-                            User key = (User) votedUser.getKey();
                             this.scoreEvent = new ScoreEvent(5, false, "Score Message", "title");
                             //votedUser.getKey().
                         }
