@@ -22,8 +22,9 @@ public class Case
     private Content content;
     private static final AtomicInteger count = new AtomicInteger(0);
 
-    public Case(String title)
+    public Case(User owner, String title)
     {
+        this.owner = owner;
         this.content= new Content(title);
         this.ID= count.incrementAndGet();
         this.createdAt= Instant.now();
