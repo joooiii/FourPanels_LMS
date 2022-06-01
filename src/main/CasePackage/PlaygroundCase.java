@@ -13,7 +13,7 @@ public class PlaygroundCase
 {
     public static void main(String[] arg)
     {
-        Case case1= new Case("Back pain");
+        Case case1= new Case(null,"Back pain");
 
        case1.setKeywordsProcedure(Keyword.Procedure.BIOTIN_ERGAENZUNG);
        case1.setKeywordsProcedure(Keyword.Procedure.BURCH_VERFAHREN);
