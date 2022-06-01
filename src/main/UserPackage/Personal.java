@@ -56,6 +56,16 @@ public class Personal
 
     public void setTitle(String title)
     {
-        this.title = Ensurer.ensureNonBlank(title, "title");;
+        this.title = Ensurer.ensureNonBlank(title, "title");
+    }
+
+    @Override
+    public String toString()
+    {
+        return
+                "First Name: " + firstName + '\n' +
+                "Last Name: " + lastName + '\n' +
+                "Birthday: " + birthday + "\n" +
+                "Title: " + title;
     }
 }
