@@ -28,7 +28,7 @@ public class Voting
         this.endsAt = ensureValidEndDateTime(endsAt);
         answers = new ArrayList<>();
         results = new HashMap<>();
-        votedUsers=new HashMap<>();
+        votedUsers = new HashMap<>();
 
     }
 
@@ -52,6 +52,7 @@ public class Voting
         }
 
     }
+
     public List<Answer> getAnswers()
     {
         return answers;
@@ -82,43 +83,43 @@ public class Voting
 
     }*/
 
-    public void voting( Integer userId, int answernumber, Case cases)
+    public void voting(Integer userId, int answernumber, Case cases)
     {
         // If voting is before endTime
         boolean voteOnTime = (endsAt.isAfter(LocalDateTime.now()));
         // Is User memeber
-        checkState(cases.getMembers().containsKey(userId), "U are not member");
+        checkState(!cases.getMembers().containsKey(userId), "U are not member");
         // Is User alredy voted
         checkState(!votedUsers.containsKey(userId), "U have alredy voted");
-                if (voteOnTime)
-                {
-                    checkState(!(answernumber >answers.size()),"U can vote from 0 to" + answers.size());
+        if (voteOnTime)
+        {
+            checkState(!(answernumber > answers.size()), "U can vote from 0 to" + answers.size());
 
-                        for (Answer a : answers)
-                        {
-                            if (answernumber == a.getAnswerID())
-                            {
-                                results.put(a.getAnswerText(), results.get(a.getAnswerText()) + 1);
-                            }
-                        }
-                        if (answernumber == 0)
-                        {
-                            System.out.println("Add new Answer");
-                            Scanner input = new Scanner(System.in);
-                            String newAnswer = input.nextLine();
-                            results.put(newAnswer, 1.0);
-                            votedUsers.put(userId,answernumber);
-                            // to hom user is dises score gegeben?
-                            this.scoreEvent= new ScoreEvent(5,false, "Score Message", "title");
-
-                        }
-                } else
+            for (Answer a : answers)
+            {
+                if (answernumber == a.getAnswerID())
                 {
-                    System.out.println("U are too late for vote");
+                    results.put(a.getAnswerText(), results.get(a.getAnswerText()) + 1);
                 }
+            }
+            if (answernumber == 0)
+            {
+                System.out.println("Add new Answer");
+                Scanner input = new Scanner(System.in);
+                String newAnswer = input.nextLine();
+                Answer d = new Answer(newAnswer);
+                answers.add(d);
+                results.put(newAnswer, 1.0);
+                votedUsers.put(userId, answernumber);
+                // to hom user is dises score gegeben?
+                this.scoreEvent = new ScoreEvent(5, false, "Score Message", "title");
+
+            }
+        } else
+        {
+            System.out.println("U are too late for vote");
         }
-
-
+    }
 
 
     public double berechneSummeResults()
@@ -138,35 +139,52 @@ public class Voting
         List<String> keys = new ArrayList<>();
         for (Map.Entry<String, Double> entry : results.entrySet())
         {
-            if (entry.getValue()==max)
+            if (entry.getValue() == max)
             {
                 keys.add(entry.getKey());
             }
         }
-        return  keys;
+        return keys;
     }
 
     public void corectAnswersList()
     {
         for (Map.Entry result : results.entrySet())
         {
-            String key= (String)result.getKey();
-             double value = (double) result.getValue() *100/ berechneSummeResults() ;
-            System.out.println(key +": " + value + "%");
+            String key = (String) result.getKey();
+            double value = Math.round((double) result.getValue() * 100 / berechneSummeResults());
+            System.out.println((key + ": " + value + "%"));
         }
+
+    }
+
+
+    public String toString()
+    {
+        return  "Question: " + getQuestion() + "\n"
+        + "Answers with Scores: " + getResults() +"\n"+
+                "-".repeat(20)+ "\n"+
+                 "Voted " + berechneSummeResults() + " People " + "\n"+
+                "-".repeat(20)+ "\n"+
+                 "Maximum votes have answer: " + corectAnswer()+
+                "\n" + "-".repeat(20);
     }
 
     // Uberprufen ob dass stimmt
-    public void addScoreForRightAnswer()
+    // to how user give ich scores
+    public void addScoreForRightAnswer(int answerNumber)
     {
-        if (votedUsers.containsValue(answers.indexOf(corectAnswer())))
+        for (Answer a : answers)
         {
-            if (endsAt.isAfter(LocalDateTime.now()))
+            if (answerNumber == a.getAnswerID())
             {
-                this.scoreEvent = new ScoreEvent(5, false, "Score Message", "title");
+                if (endsAt.isAfter(LocalDateTime.now()))
+                {
+                    this.scoreEvent = new ScoreEvent(5, false, "Score Message", "title");
+                }
             }
+
         }
 
     }
-
 }
