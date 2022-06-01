@@ -5,7 +5,10 @@ import CasePackage.Case;
 import KeywordPackage.Keyword;
 import validation.Ensurer;
 
+import java.security.Key;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -26,18 +29,18 @@ public class User
     private List<Keyword.Profession> professionKeywords;
     private List<Keyword.Language> languageKeywords;
 
-    public User(String eMail, String password, Instant createdAt, Instant updatedAt, Personal personal, Social social, Score score, List<Keyword.Profession> professionKeywords, List<Keyword.Language> languageKeywords)
+    public User(String eMail, String password, Instant createdAt, Instant updatedAt, Personal personal)
     {
         this.userID = count.incrementAndGet();
         this.eMail = Ensurer.ensureEmailValid(eMail);
         this.password = Ensurer.ensurePasswordValid(password);
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.professionKeywords = professionKeywords;
-        this.languageKeywords = languageKeywords;
+        this.professionKeywords = new ArrayList<Keyword.Profession>();
+        this.languageKeywords = new ArrayList<Keyword.Language>();
         this.personal = personal;
-        this.social = social;
-        this.score = score;
+        this.social = new Social(new HashMap<>());
+        this.score = new Score();
     }
 
     public Integer getUserID()
@@ -198,13 +201,15 @@ public class User
                 "Member since: " + createdAt.toString() + "\n" +
                 "Last profile update: " + updatedAt.toString() + "\n" +
                 "-------------------------------------------------------" + "\n" +
+                "Keywords: " + professionKeywords.toString() + languageKeywords.toString() + "\n" +
+                "-------------------------------------------------------" + "\n" +
                 "Personal Information: " + "\n" + personal.toString() + "\n" +
                 "-------------------------------------------------------" + "\n" +
                 "Social Information: " + "\n" + social.toString("Friends: ", friended) + "\n" +
                 social.toString("Incoming Requests from: ", incoming) + "\n" +
                 social.toString("Outgoing Requests to: ", outgoing) + "\n" +
-                "-------------------------------------------------------" + "\n" +
-                "Keywords: " + professionKeywords.toString() + languageKeywords.toString()
+                "-------------------------------------------------------" + "\n"
+//                + "Scores: " + score.toString()
                 ;
     }
 

@@ -16,39 +16,52 @@ public class Playground
 
     public static void main(String[] args)
     {
-//
-    /*    MediaSection med = new MediaSection(Paths.get("c:\\user\\help.jpeg"), "lululul");
-        TextSection txt = new TextSection("Mein Patient hört nicht auf aus seinen Ohren zu bluten Hilfeee!!! ", "OhrenBluten");
-        Content con = new Content("AUA");
-        TextSection txt2= new TextSection("Wenn er seinen Kopf bewegt fangt es wieder zum Bluten an auch wenn ich die Wunde schon zugenäht habe", "help");
-        txt2.addToExcistingSection();
-        con.addSection(txt);
 
-        con.addSection(txt2);
-//
-          con.addSection(med);
-//
-        System.out.println(con.toString());
+        User d = new User("denis@yolo.at", "Password1!", Instant.now(), Instant.now(), new Personal("Denis", "Mehicic", LocalDate.of(1992, 5, 30), "Dr."));
+        User a = new User("ana@yolo.at", "Password2!", Instant.now(), Instant.now(), new Personal("Ana", "Susa", LocalDate.of(1990, 7, 11), "Prim. Dr."));
+        User j = new User("jo@yolo.at", "Password3!", Instant.now(), Instant.now(), new Personal("Jo", "Lackner", LocalDate.of(1996, 11, 15), "Prof. Dr."));
+        User h = new User("amber@yolo.at", "Password4!", Instant.now(), Instant.now(), new Personal("Amber", "Heard", LocalDate.of(2000, 1, 1), "Dr. Phil."));
+        User x = new User("johnny@yolo.at", "Password5!", Instant.now(), Instant.now(), new Personal("Johnny", "Depp", LocalDate.of(1970, 5, 30), "Prim. Prof. Dr. Dr."));
 
-//        ScoreEvent sorc = new ScoreEvent(10,'2022-05-25',false,"You voted!", "Points" );*/
-// Playground 
-        User u = new User("denis@yolo.at", "Password1!", Instant.now(), Instant.now(), new Personal("Denis", "Mehicic", LocalDate.of(1992, 5, 30), "Dr."), new Social(new HashMap<>()), new Score(), new ArrayList<Keyword.Profession>(), new ArrayList<Keyword.Language>());
-        User o = new User("ana@yolo.at", "Password1!", Instant.now(), Instant.now(), new Personal("Ana", "Susa", LocalDate.of(1992, 5, 30), "Prim."), new Social(new HashMap<>()), new Score(), new ArrayList<Keyword.Profession>(), new ArrayList<Keyword.Language>());
-        User j = new User("jo@yolo.at", "Password1!", Instant.now(), Instant.now(), new Personal("Jo", "Lackner", LocalDate.of(1992, 5, 30), "Prof."), new Social(new HashMap<>()), new Score(), new ArrayList<Keyword.Profession>(), new ArrayList<Keyword.Language>());
 
-        u.addKeywordProfession(Keyword.Profession.ALLGEMEINMEDIZIN);
-        u.addKeywordProfession(Keyword.Profession.ALLERGOLOGIE);
-        u.addKeywordLanguage(Keyword.Language.DUTCH);
+        d.addKeywordProfession(Keyword.Profession.ALLGEMEINMEDIZIN);
+        d.addKeywordProfession(Keyword.Profession.ALLERGOLOGIE);
+        d.addKeywordLanguage(Keyword.Language.DUTCH);
+        d.addKeywordLanguage(Keyword.Language.BULGARIAN);
 
-        u.sendRequest(o);
-        o.acceptRequest(u);
-        j.sendRequest(o);
-        o.acceptRequest(j);
-        u.sendRequest(j);
+        a.addKeywordProfession(Keyword.Profession.CHIRUGIE);
+        a.addKeywordProfession(Keyword.Profession.ANATOMIE);
+        a.addKeywordLanguage(Keyword.Language.GREEK);
+        a.addKeywordLanguage(Keyword.Language.HINDI);
 
-        System.out.println(u.toString());
-        System.out.println(o.toString());
+        j.addKeywordProfession(Keyword.Profession.ARBEITSMEDIZIN);
+        j.addKeywordProfession(Keyword.Profession.ALTERNATIVE_MEDIZIN);
+        j.addKeywordLanguage(Keyword.Language.KOREAN);
+        j.addKeywordLanguage(Keyword.Language.GERMAN);
+
+        h.addKeywordProfession(Keyword.Profession.GYNAEKOLOGIE_UND_GEBURTSHILFE);
+        h.addKeywordProfession(Keyword.Profession.UROLOGIE);
+        h.addKeywordLanguage(Keyword.Language.ENGLISH);
+        h.addKeywordLanguage(Keyword.Language.CZECH);
+
+        x.addKeywordProfession(Keyword.Profession.ANAESTHESIOLOGIE);
+        x.addKeywordProfession(Keyword.Profession.HAEMATOLOGIE);
+        x.addKeywordLanguage(Keyword.Language.ENGLISH);
+        x.addKeywordLanguage(Keyword.Language.ITALIAN);
+
+        d.sendRequest(a);
+        a.acceptRequest(d);
+        j.sendRequest(a);
+        a.acceptRequest(j);
+        d.sendRequest(x);
+
+
+        System.out.println(d.toString());
+        System.out.println(a.toString());
         System.out.println(j.toString());
+        System.out.println(h.toString());
+        System.out.println(x.toString());
+
 
 
 
