@@ -11,7 +11,6 @@ import static validation.Ensurer.checkState;
 
 public class PlaygroundCase
 {
-
     public static void main(String[] arg)
     {
         Case case1= new Case("Back pain");
@@ -26,11 +25,7 @@ public class PlaygroundCase
 
         Voting voting= new Voting("Is it for OP?", LocalDateTime.now().plus(1,ChronoUnit.DAYS));
 
-        System.out.println(case1.getContent().getTitle());
-        System.out.println(voting.getQuestion());
-        System.out.println(case1.getKeywordsProcedure());
-        System.out.println(case1.getKeywordsSymptoms());
-        System.out.println(case1.getKeywordsProfession());
+
 
         Answer a= new Answer("Yes");
         Answer b= new Answer("NO");
@@ -46,11 +41,10 @@ public class PlaygroundCase
         voting.voting(2,3, case1);
         voting.voting(4,1, case1);
         voting.voting(0, 1, case1);
-        System.out.println(voting.getResults());
-        System.out.println("Votet " + voting.berechneSummeResults() + " People");
-        System.out.println("Maximum votes have answer: " + voting.corectAnswer());
+
+        System.out.println(case1.toString());
+        System.out.println(voting.toString());
         voting.corectAnswersList();
-        voting.addScoreForRightAnswer();
 
     }
 }
