@@ -14,7 +14,7 @@ public class Case
     private Instant createdAt;
     private Instant updatedAt;
     private User owner;
-    private HashMap<Integer, User> members;
+    private List<User> members;
     private List<Keyword.Symptom> symptoms;
     private List<Keyword.Procedure> procedures;
     private List<Keyword.Profession> professions;
@@ -28,7 +28,7 @@ public class Case
         this.content= new Content(title);
         this.ID= count.incrementAndGet();
         this.createdAt= Instant.now();
-        this.members = new HashMap<>();
+        this.members = new ArrayList<>();
         this.symptoms = new ArrayList<Keyword.Symptom>();
         this.procedures=new ArrayList<Keyword.Procedure>();
         this.professions=new ArrayList<Keyword.Profession>();
@@ -68,22 +68,18 @@ public class Case
     }
 
     //TODO put members
-    public void addMember(Integer i, User user)
+    public void addMember(User user)
     {
-        members.put(i,user);
+        members.add(user);
     }
 
 // what are the members?
-    public HashMap<Integer, User> getMembers()
+    public List<User> getMembers()
     {
         return members;
     }
 
-    // list from Users...
-    public void setMembers(User user)
-    {
-        members.put(user.getUserID(), user);
-    }
+
 
     public List<Keyword.Symptom> getKeywordsSymptoms()
     {

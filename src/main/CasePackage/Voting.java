@@ -1,6 +1,7 @@
 package CasePackage;
 
 import UserPackage.ScoreEvent;
+import UserPackage.User;
 import validation.Ensurer;
 
 import javax.swing.*;
@@ -18,7 +19,7 @@ public class Voting
     private List<Answer> answers;
     private HashMap<String, Double> results;
     private LocalDateTime endsAt;
-    private HashMap<Integer, Integer> votedUsers; // key is User ID und value is die Antwort
+    private HashMap<User, Integer> votedUsers; // key is User  und value is die Antwort
     private Case cases;
     ScoreEvent scoreEvent;
 
@@ -83,14 +84,14 @@ public class Voting
 
     }*/
 
-    public void voting(Integer userId, int answernumber, Case cases)
+    public void voting(User user, int answernumber)
     {
         // If voting is before endTime
         boolean voteOnTime = (endsAt.isAfter(LocalDateTime.now()));
         // Is User memeber
-        checkState(!cases.getMembers().containsKey(userId), "U are not member");
+        checkState(!cases.getMembers().contains(user), "U are not member");
         // Is User alredy voted
-        checkState(!votedUsers.containsKey(userId), "U have alredy voted");
+        checkState(!votedUsers.containsKey(user), "U have alredy voted");
         if (voteOnTime)
         {
             checkState(!(answernumber > answers.size()), "U can vote from 0 to" + answers.size());
@@ -110,7 +111,7 @@ public class Voting
                 Answer d = new Answer(newAnswer);
                 answers.add(d);
                 results.put(newAnswer, 1.0);
-                votedUsers.put(userId, answernumber);
+                votedUsers.put(user, answernumber);
                 // to hom user is dises score gegeben?
                 this.scoreEvent = new ScoreEvent(5, false, "Score Message", "title");
 
@@ -174,17 +175,23 @@ public class Voting
     // to how user give ich scores
     public void addScoreForRightAnswer(int answerNumber)
     {
-        for (Answer a : answers)
-        {
-            if (answerNumber == a.getAnswerID())
-            {
                 if (endsAt.isAfter(LocalDateTime.now()))
                 {
-                    this.scoreEvent = new ScoreEvent(5, false, "Score Message", "title");
-                }
-            }
+                    for (Map.Entry votedUser : votedUsers.entrySet())
+                    {
+                        if ((int)votedUser.getValue() == answerNumber)
+                        {
+                            User key = (User) votedUser.getKey();
+                            this.scoreEvent = new ScoreEvent(5, false, "Score Message", "title");
+                            //votedUser.getKey().
+                        }
 
-        }
+                    }
+
+                }
+
+
+
 
     }
 }

@@ -217,5 +217,10 @@ public class User
     {
         return personal.getLastName();
     }
+
+    public void addScore()
+    {
+        this.score = new ScoreEvent(50, true, "congratulations, you are a genius", "right answer");
+    }
 }
 
