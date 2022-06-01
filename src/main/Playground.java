@@ -31,7 +31,7 @@ public class Playground
         System.out.println(con.toString());
 
 //        ScoreEvent sorc = new ScoreEvent(10,'2022-05-25',false,"You voted!", "Points" );*/
-
+// Playground 
         User u = new User("denis@yolo.at", "Password1!", Instant.now(), Instant.now(), new Personal("Denis", "Mehicic", LocalDate.of(1992, 5, 30), "Dr."), new Social(new HashMap<>()), new Score(), new ArrayList<Keyword.Profession>(), new ArrayList<Keyword.Language>());
         User o = new User("ana@yolo.at", "Password1!", Instant.now(), Instant.now(), new Personal("Ana", "Susa", LocalDate.of(1992, 5, 30), "Prim."), new Social(new HashMap<>()), new Score(), new ArrayList<Keyword.Profession>(), new ArrayList<Keyword.Language>());
         User j = new User("jo@yolo.at", "Password1!", Instant.now(), Instant.now(), new Personal("Jo", "Lackner", LocalDate.of(1992, 5, 30), "Prof."), new Social(new HashMap<>()), new Score(), new ArrayList<Keyword.Profession>(), new ArrayList<Keyword.Language>());
