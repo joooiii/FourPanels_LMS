@@ -1,5 +1,7 @@
 package validation;
 
+import UserPackage.User;
+
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -55,6 +57,7 @@ import java.util.Objects;
                 throw new IllegalStateException(message);
         }
 
+        // minimum 8 characters, 1 uppercase, 1 numeral, 1 special character
         public static boolean isValidPassword(String pwd) {return pwd.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!§@#$%^&-+=()])(?=\\S+$).{8,20}$");}
 
         public static String ensurePasswordValid(String pwd)
@@ -90,6 +93,20 @@ import java.util.Objects;
 
             return endDateTime;
 
+        }
+
+        public boolean isDifferentUser(User u, User o)
+        {
+            return (u != o);
+        }
+
+        public static User ensureDifferentUsers(User u, User o)
+        {
+            if (!isDifferentUser(u, o))
+                throw new IllegalArgumentException(
+                        String.format("%s und %s dürfen nicht derselbe User sein", u, o)
+                );
+                return u;
         }
     }
 

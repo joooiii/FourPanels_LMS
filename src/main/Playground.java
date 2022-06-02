@@ -81,7 +81,7 @@ public class Playground
         denisCase.setKeywordProfesions(Keyword.Profession.CHIRUGIE);
         denisCase.setKeywordsSymptoms(Keyword.Symptom.BETA_CROSSLAPS);
         TextSection text= new TextSection("Mein Patient leided","AUA,");
-        //text.addToExcistingSection();
+        text.addToExcistingSection();
         MediaSection media = new MediaSection(Path.of("C:\\Users\\Johanna\\Documents\\Kolleg\\uiuiui.jpeg"),"Gehirn");
         denisCase.getContent().addSection(text);
         denisCase.getContent().addSection(media);
@@ -115,22 +115,8 @@ public class Playground
         ana.getScore().sortByPointsUp();
         System.out.println(ana.getScore().toString());
         System.out.println();
-
-        System.out.println("--------- Speichern von Usern Und Cases --------");
-        db.saveUsers("C:\\Users\\Johanna\\Documents\\Kolleg\\users.ser");
-        db.saveCases("C:\\Users\\Johanna\\Documents\\cases.ser");
-        System.out.println("--------- Speichern--------");
-
-
-        System.out.println(db.toString());
-
-        System.out.println("--------- Laden von Usern und Cases --------");
-        db.loadUsers("C:\\Users\\Johanna\\Documents\\Kolleg\\users.ser");
-        db.loadCases("C:\\Users\\Johanna\\Documents\\cases.ser");
-
-        System.out.println("--------- Laden OKAY --------");
-
-
+        System.out.println(votingDenisCase.toString());
+        votingDenisCase.corectAnswersList();
 
     }
 }

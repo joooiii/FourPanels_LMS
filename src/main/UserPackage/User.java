@@ -140,6 +140,8 @@ public class User
     public void sendRequest(User other)
     {
         Objects.requireNonNull(other);
+        Ensurer.ensureDifferentUsers(this, other);
+
         if (!social.getContacts().containsKey(other)) {
             this.social.getContacts().put(other, (outgoing));
             other.social.getContacts().put(this, (incoming));
@@ -150,6 +152,7 @@ public class User
     public void acceptRequest(User other)
     {
         Objects.requireNonNull(other);
+        Ensurer.ensureDifferentUsers(this, other);
         if (social.getContacts().containsKey(other)) {
             this.social.getContacts().replace(other, (friended));
             other.social.getContacts().replace(this, (friended));
@@ -160,6 +163,7 @@ public class User
     public void declineRequest(User other)
     {
         Objects.requireNonNull(other);
+        Ensurer.ensureDifferentUsers(this, other);
         if (social.getContacts().containsKey(other)) {
             this.social.getContacts().remove(other);
             other.social.getContacts().remove(this);
@@ -170,6 +174,7 @@ public class User
     public void removeFriend(User other)
     {
         Objects.requireNonNull(other);
+        Ensurer.ensureDifferentUsers(this, other);
         if (social.getContacts().containsKey(other)) {
             this.social.getContacts().remove(other);
             other.social.getContacts().remove(this);
