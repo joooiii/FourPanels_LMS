@@ -95,7 +95,7 @@ import java.util.Objects;
 
         }
 
-        public boolean isDifferentUser(User u, User o)
+        public static boolean isDifferentUser(User u, User o)
         {
             return (u != o);
         }

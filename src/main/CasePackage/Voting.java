@@ -93,17 +93,17 @@ public class Voting
         // Is User memeber
         checkState(cases.getMembers().contains(user), "U are not member");
         // Is User alredy voted
-        checkState(!votedUsers.containsKey(user), "U have alredy voted");
+        checkState(!votedUsers.containsKey(user), "U have already voted");
         if (voteOnTime)
         {
             checkState(!(answernumber > answers.size()), "U can vote from 0 to" + answers.size());
 
-            for (Answer a : answers)
+            for (Answer answer : answers)
             {
-                if (answernumber == a.getAnswerID())
+                if (answernumber == answer.getAnswerID())
                 {
 
-                    results.put(a.getAnswerText(), results.get(a.getAnswerText()) + 1);
+                    results.put(answer.getAnswerText(), results.get(answer.getAnswerText()) + 1);
                     votedUsers.put(user, answernumber);
                     ScoreEvent sE = new ScoreEvent(5, false, "Thanks you for voting on:  " + cases.getContent().getTitle(), "Voting Points");
                     user.getScore().addScore(sE);

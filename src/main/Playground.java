@@ -118,5 +118,49 @@ public class Playground
         System.out.println(votingDenisCase.toString());
         votingDenisCase.corectAnswersList();
 
+
+        //Anas CASE-----------------------------------------------------------------
+        Case anasCase = ana.createCase("Mein Patient schaut tod aus");
+        anasCase.setKeywordsProcedure(Keyword.Procedure.BIOTIN_ERGAENZUNG);
+        anasCase.setKeywordProfesions(Keyword.Profession.CHIRUGIE);
+        anasCase.setKeywordsSymptoms(Keyword.Symptom.BETA_CROSSLAPS);
+        TextSection text2= new TextSection("Mein Patient leided","AUA,");
+        //text.addToExcistingSection();
+        MediaSection media3 = new MediaSection(Path.of("C:\\Users\\Johanna\\Documents\\Kolleg\\uiuiui.jpeg"),"Gehirn");
+        anasCase.getContent().addSection(text2);
+        anasCase.getContent().addSection(media3);
+        System.out.println(anasCase.toString());
+        System.out.println(anasCase.getContent().toString());
+        System.out.println();
+
+        Voting votingAnasCase= new Voting("Ist er wirklich tod", LocalDateTime.now().plus(2, ChronoUnit.DAYS));
+        Answer aA= new Answer("yes");
+        Answer bA=new Answer("no");
+        Answer cA= new Answer("maybe");
+
+        votingAnasCase.setAnswers(aA);
+        votingAnasCase.setAnswers(bA);
+        votingAnasCase.setAnswers(cA);
+        anasCase.addMember(ana);
+        anasCase.addMember(jo);
+        votingAnasCase.corectAnswersList();
+
+        votingAnasCase.voting(ana, 2,anasCase);
+        votingAnasCase.voting(jo,1,anasCase);
+
+        votingAnasCase.addScoreForRightAnswer(1,ana,anasCase);
+        System.out.println(votingAnasCase.toString());
+
+        System.out.println(denis.toString());
+        System.out.println(ana.toString());
+        System.out.println(jo.toString());
+        System.out.println(amber.toString());
+        System.out.println(depp.toString());
+        ana.getScore().sortByPointsUp();
+        System.out.println(ana.getScore().toString());
+        System.out.println();
+        System.out.println(votingAnasCase.toString());
+        votingAnasCase.corectAnswersList();
+
     }
 }
