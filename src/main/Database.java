@@ -50,6 +50,7 @@ public class Database
         }
         catch (IOException ex)
         {
+
             System.out.println(ex.getMessage());
             ex.getStackTrace();
             throw new IOException();
