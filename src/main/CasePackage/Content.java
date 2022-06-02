@@ -45,7 +45,7 @@ public class Content
 
     public void addSection(Section section)
     {
-        Ensurer.checkState(!(sections.size() < 8), "Cant add more than 10 sections");
+        Ensurer.checkState(sections.size() < 8, "Cant add more than 8 sections");
         sections.add(section);
     }
 

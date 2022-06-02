@@ -102,10 +102,12 @@ public class Voting
             {
                 if (answernumber == a.getAnswerID())
                 {
-                    ScoreEvent sE = new ScoreEvent(5, false, "Thanks you for voting ", "Voting Points");
-                    user.getScore().addScore(sE);
+
                     results.put(a.getAnswerText(), results.get(a.getAnswerText()) + 1);
                     votedUsers.put(user, answernumber);
+                    ScoreEvent sE = new ScoreEvent(5, false, "Thanks you for voting on:  " + cases.getContent().getTitle(), "Voting Points");
+                    user.getScore().addScore(sE);
+
                 }
             }
             if (answernumber == 0)

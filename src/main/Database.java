@@ -2,6 +2,7 @@ import CasePackage.Case;
 import UserPackage.User;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -10,9 +11,15 @@ import static validation.Ensurer.checkState;
 public class Database
 {
 
-    private List<Case> cases;
-    private List<User> users;
 
+
+    private List<Case> cases = new ArrayList<>();
+    private List<User> users = new ArrayList<>();
+
+    public Database()
+    {
+
+    }
 
     public void aufnehmenUser(User u)
     {

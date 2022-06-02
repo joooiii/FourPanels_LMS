@@ -41,6 +41,7 @@ public class User
         this.personal = personal;
         this.social = new Social(new HashMap<>());
         this.score = new Score(new ArrayList<>());
+
     }
 
     public Integer getUserID()
