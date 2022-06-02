@@ -5,7 +5,7 @@ import validation.Ensurer;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class ScoreEvent extends Score
+public class ScoreEvent
 {
     private int point;
     private LocalDate date;
@@ -50,7 +50,7 @@ public class ScoreEvent extends Score
     @Override
     public String toString()
     {
-        return title + "\n" + date + "Punkte: " + getPoint() + "\n" + scoreMessage + "\n";
+        return title + "\n" + date + "\nPunkte: " + getPoint() + "\n" + scoreMessage + "\n";
     }
 
 }

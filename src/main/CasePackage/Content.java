@@ -17,7 +17,7 @@ public class Content
         this.title=title;
         this.sections=new ArrayList<>();
     }
-//ToDO nru media geht nicht
+
     public String getTitle()
     {
         return title;
@@ -45,7 +45,7 @@ public class Content
 
     public void addSection(Section section)
     {
-        Ensurer.checkState(sections.size() < 10, "Cant add more than 10 sections");
+        Ensurer.checkState(!(sections.size() < 8), "Cant add more than 10 sections");
         sections.add(section);
     }
 
@@ -66,8 +66,7 @@ public class Content
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format("Content: %s\n", title));
-        sb.append(String.format("Anzahl: %d\n", getAnzahl()));
+        sb.append(String.format("Number of Sections: %d\n", getAnzahl()));
         for (Section section : sections)
         {
             sb.append(section.toString()).append("\n");

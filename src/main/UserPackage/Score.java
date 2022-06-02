@@ -12,24 +12,7 @@ import static java.util.Comparator.naturalOrder;
 
 public class Score
 {
-//    private HashMap<LocalDateTime, ScoreEvent> scores;
-//
-//
-//
-//    public Score(HashMap<LocalDateTime, ScoreEvent> scores)
-//    {
-//        this.scores = scores;
-//    }
-//
-//    public HashMap<LocalDateTime, ScoreEvent> getScores()
-//    {
-//        return scores;
-//    }
-//
-//    public void setScores(HashMap<LocalDateTime, ScoreEvent> scores)
-//    {
-//        this.scores = scores;
-//    }
+
 
     private List<ScoreEvent> scores;
 
@@ -38,6 +21,10 @@ public class Score
         return scores;
     }
 
+    public Score(List<ScoreEvent> scores)
+    {
+        this.scores = scores;
+    }
 
     public void addScore(ScoreEvent score)
     {
@@ -136,13 +123,12 @@ public class Score
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
-        sb.append("Scores: ");
-        sb.append(String.format("Anzahl: %d\n", countEvents()));
-        sb.append(String.format("Gesamtpunkte: %.2f\n", berechneGesamtScore()));
-        sb.append(String.format("Durchschnittliche Punkte: %.2f\n", avgPoints()));
+        sb.append("\nAnzahl: "+ countEvents());
+        sb.append("\nGesamtpunkte: " +berechneGesamtScore());
+        sb.append("\nDurchschnittliche Punkte: " + avgPoints());
         for (ScoreEvent scoreEvent : scores)
         {
-            sb.append(scoreEvent.toString()).append("\n");
+            sb.append("\n"+scoreEvent.toString()).append("\n");
         }
         return sb.toString();
     }

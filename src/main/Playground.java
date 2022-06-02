@@ -4,9 +4,12 @@ import UserPackage.*;
 import jdk.swing.interop.SwingInterOpUtils;
 import org.w3c.dom.Text;
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -62,7 +65,44 @@ public class Playground
         System.out.println(h.toString());
         System.out.println(x.toString());
 
+        Case c = d.createCase("Patient bleeding from Anus");
 
+        c.setKeywordsProcedure(Keyword.Procedure.BIOTIN_ERGAENZUNG);
+        c.setKeywordProfesions(Keyword.Profession.CHIRUGIE);
+        c.setKeywordsSymptoms(Keyword.Symptom.BETA_CROSSLAPS);
+        TextSection text= new TextSection("Mein Patient leided","AUA,");
+        //text.addToExcistingSection();
+        MediaSection media = new MediaSection(Path.of("C:\\Users\\Johanna\\Documents\\Kolleg\\uiuiui.jpeg"),"Gehirn");
+        c.getContent().addSection(text);
+        c.getContent().addSection(media);
+        System.out.println(c.toString());
+        System.out.println(c.getContent().toString());
+        Voting votigC= new Voting("Is it for OP?", LocalDateTime.now().plus(1, ChronoUnit.DAYS));
+
+        Answer a1= new Answer("yes");
+        Answer b1=new Answer("no");
+        Answer c1= new Answer("maybe");
+        votigC.setAnswers(a1);
+        votigC.setAnswers(b1);
+        votigC.setAnswers(c1);
+        c.addMember(a);
+        c.addMember(j);
+        votigC.corectAnswersList();
+        //System.out.println(c.getMembers());
+        votigC.voting(a, 1,c);
+        votigC.voting(j,2,c);
+        //votigC.voting(d,0,c);
+        //votigC.voting(x,1,c);
+        votigC.addScoreForRightAnswer(1,d,c);
+        System.out.println(votigC.toString());
+        //votigC.corectAnswersList();
+        System.out.println(d.toString());
+        System.out.println(a.toString());
+        System.out.println(j.toString());
+        System.out.println(h.toString());
+        System.out.println(x.toString());
+        a.getScore().sortByPointsUp();
+        System.out.println(a.getScore().toString());
 
 
     }

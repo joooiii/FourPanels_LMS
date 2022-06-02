@@ -42,7 +42,6 @@ public class TextSection extends Section
         StringBuilder sb = new StringBuilder();
         sb.append(text + "\n");
         sb.append(sc.nextLine());
-        System.out.println(sb.toString());
         setText(sb.toString());
 
 

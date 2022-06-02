@@ -4,7 +4,6 @@ import KeywordPackage.Keyword;
 import UserPackage.User;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -14,7 +13,7 @@ public class Case
     private Instant createdAt;
     private Instant updatedAt;
     private User owner;
-    private List<User> members;
+    private static List<User> members;
     private List<Keyword.Symptom> symptoms;
     private List<Keyword.Procedure> procedures;
     private List<Keyword.Profession> professions;
@@ -28,11 +27,16 @@ public class Case
         this.content= new Content(title);
         this.ID= count.incrementAndGet();
         this.createdAt= Instant.now();
-        this.members = new ArrayList<>();
+        this.members = new ArrayList<User>();
         this.symptoms = new ArrayList<Keyword.Symptom>();
         this.procedures=new ArrayList<Keyword.Procedure>();
         this.professions=new ArrayList<Keyword.Profession>();
 
+    }
+
+    public User getOwner()
+    {
+        return owner;
     }
 
     public Integer getID()
@@ -135,6 +139,7 @@ public class Case
     public String toString()
     {
         return "Title: " + content.getTitle() +"\n"
+                + "Created At: " + createdAt + "\n"
                + "-".repeat(20) + "\n" +
                 getKeywordsProcedure() + "\n"+
                 getKeywordsSymptoms() + "\n"+

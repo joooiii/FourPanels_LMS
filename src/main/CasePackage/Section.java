@@ -39,6 +39,7 @@ public class Section
         this.secTitle = Ensurer.ensureNonBlank(secTitle, "section Title");
     }
 
+
     @Override
     public String toString()
     {

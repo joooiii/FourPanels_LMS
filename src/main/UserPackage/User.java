@@ -40,7 +40,7 @@ public class User
         this.languageKeywords = new ArrayList<Keyword.Language>();
         this.personal = personal;
         this.social = new Social(new HashMap<>());
-        this.score = new Score();
+        this.score = new Score(new ArrayList<>());
     }
 
     public Integer getUserID()
@@ -176,10 +176,12 @@ public class User
             System.out.println("Fehler: User nicht befreundet");
     }
 
-    public void createCase(String title)
+    public Case createCase(String title)
     {
-        new Case(this, title);
-        this.score.addScore(new ScoreEvent(5, false, "Congratulations! You received 10 points for creating a case!", "Case created!"));
+        this.score.addScore(new ScoreEvent(10, false, "Congratulations! You received 10 points for creating a case!", "Case created!"));
+        Case c = new Case(this,title);
+        c.addMember(this);
+        return c;
     }
 
     public void addKeywordProfession(Keyword.Profession keyword)
@@ -209,7 +211,7 @@ public class User
                 social.toString("Incoming Requests from: ", incoming) + "\n" +
                 social.toString("Outgoing Requests to: ", outgoing) + "\n" +
                 "-------------------------------------------------------" + "\n"
-//                + "Scores: " + score.toString()
+                + "Scores: " + score.toString()
                 ;
     }
 
@@ -223,9 +225,5 @@ public class User
         return personal.getLastName();
     }
 
-    public void addScore()
-    {
-        this.score = new ScoreEvent(50, true, "congratulations, you are a genius", "right answer");
-    }
 }
 
