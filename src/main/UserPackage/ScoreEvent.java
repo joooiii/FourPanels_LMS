@@ -32,6 +32,11 @@ public class ScoreEvent
         return date;
     }
 
+    public void setDate(LocalDate loo)
+    {
+        date = loo;
+    }
+
     public boolean isExpert()
     {
         return expert;

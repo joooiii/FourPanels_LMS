@@ -10,5 +10,4 @@ public class DateComperator implements Comparator<ScoreEvent>
         return o1.getDate().compareTo(o2.getDate());
     }
 
-
 }
