@@ -73,10 +73,17 @@ public class Case
         this.updatedAt = Instant.now();
     }
 
-    //TODO put members
+
     public void addMember(User user)
     {
-        members.add(user);
+        if (!members.contains(user))
+        {
+            members.add(user);
+        }
+        else
+        {
+            System.out.println("That User is already a member");
+        }
     }
 
 // what are the members?
@@ -85,7 +92,14 @@ public class Case
         return members;
     }
 
+    public void listOfMembers()
+    {
+        for (User m : members)
+        {
+            System.out.println("Members of Case : "+ m.getPersonal().getFirstName() +  m.getPersonal().getLastName() + "\n");
 
+        }
+    }
 
     public List<Keyword.Symptom> getKeywordsSymptoms()
     {
