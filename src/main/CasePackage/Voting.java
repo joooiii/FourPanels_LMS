@@ -92,7 +92,6 @@ public class Voting
             }
             if (a == null)
             {
-
                 System.out.println("Add new Answer");
                 Scanner input = new Scanner(System.in);
                 String newAnswer = input.nextLine();
