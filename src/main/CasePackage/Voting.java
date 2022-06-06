@@ -6,6 +6,7 @@ import UserPackage.User;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static validation.Ensurer.*;
 
@@ -13,10 +14,10 @@ public class Voting
 {
     // add Antwort als Voting...
     private String question;
-    private HashMap<Answer, Double> results;
+    private HashMap<String, Double> results;
     private LocalDateTime endsAt;
-    private HashMap<User, Answer> votedUsers; // key is User  und value is die Antwort
-
+    private HashMap<User, String> votedUsers; // key is User  und value is die Antwort
+    private List<Answer> answersList;
     private Score score;
 
     public Voting(String question, LocalDateTime endsAt)
@@ -25,6 +26,7 @@ public class Voting
         this.endsAt = ensureValidEndDateTime(endsAt);
         this.results = new HashMap<>();
         this.votedUsers = new HashMap<>();
+        this.answersList= new ArrayList<Answer>();
 
     }
 
@@ -40,11 +42,13 @@ public class Voting
 
     public void setAnswers(Answer a)
     {
-            results.put(a, 0.0);
+        answersList.add(a);
+
+            results.put(a.getAnswerText(), 0.0);
 
     }
 
-    public HashMap<Answer, Double> getResults()
+    public HashMap<String, Double> getResults()
 
     {
         return results;
@@ -67,7 +71,7 @@ public class Voting
 
     }*/
 
-    public void voting(User user, Answer a, Case cases)
+    public void voting(User user, String voteForAnswer, Case cases)
     {
         // If voting is before endTime
         boolean voteOnTime = (endsAt.isAfter(LocalDateTime.now()));
@@ -77,27 +81,28 @@ public class Voting
         checkState(!votedUsers.containsKey(user), "U have already voted");
         if (voteOnTime)
         {
-            checkState(results.containsKey(a) || a==null, "That answer doesnt exist");
+           // checkState(results.containsKey(a) || a==null, "That answer doesnt exist");
 
-            for (Map.Entry result : results.entrySet())
+            for (Answer a: answersList)
             {
-                if (a == result.getKey())
+                if (voteForAnswer == a.getAnswerText())
                 {
-                    results.put(a, results.get(a) + 1);
-                    votedUsers.put(user, a);
+                    results.put(a.getAnswerText(), results.get(a.getAnswerText()) + 1);
+                    votedUsers.put(user, voteForAnswer);
                     ScoreEvent sE = new ScoreEvent(5, false, "Thanks you for voting on:  " + cases.getContent().getTitle(), "Voting Points");
                     user.getScore().addScore(sE);
 
                 }
             }
-            if (a == null)
+            if (voteForAnswer == null)
             {
                 System.out.println("Add new Answer");
                 Scanner input = new Scanner(System.in);
                 String newAnswer = input.nextLine();
                 Answer d = new Answer(newAnswer);
-                results.put(d, 1.0);
-                votedUsers.put(user, d);
+                answersList.add(d);
+                results.put(newAnswer, 1.0);
+                votedUsers.put(user, newAnswer);
                 // to hom user is dises score gegeben?
                 ScoreEvent sE = new ScoreEvent(7, false, "Thanks for adding an answer", "Added Answer");
                 user.getScore().addScore(sE);
@@ -108,8 +113,7 @@ public class Voting
             System.out.println("U are too late for vote");
         }
     }
-
-
+    
     public double berechneSummeResults()
     {
         double sum = 0;
@@ -121,13 +125,13 @@ public class Voting
 
     }
 
-    public String mostVotedAnswer()
+    public List<String> mostVotedAnswer()
     {
-        String mostedVotedAnswer= "";
-        String list = "There is no right answer";
+
+        List <String>list = Collections.singletonList("There is no right answer");
         Double max = Collections.max(results.values());
         List<String>keys = new ArrayList<>();
-        for (Map.Entry<Answer, Double> entry : results.entrySet())
+        for (Map.Entry<String, Double> entry : results.entrySet())
         {
             if (max == 0.0)
             {
@@ -135,23 +139,22 @@ public class Voting
             }
             if (entry.getValue() == max)
             {
-                mostedVotedAnswer=  entry.getKey().getAnswerText();
+                keys= Collections.singletonList(entry.getKey());
             }
         }
-        return mostedVotedAnswer;
+        return keys;
     }
 
     public void corectAnswersList()
     {
         for (Map.Entry result : results.entrySet())
         {
-            Answer key = (Answer) result.getKey();
+            String key = (String) result.getKey();
             double value = Math.round((double) result.getValue() * 100 / berechneSummeResults());
-            System.out.println( (key.getAnswerText() + ": " + value + "%"));
+            System.out.println( (key + ": " + value + "%"));
 
         }
         System.out.println("-".repeat(20));
-
     }
 
 
@@ -167,19 +170,19 @@ public class Voting
                 "\n" + "-".repeat(20);
     }
 
-    public HashMap<User,Answer> getVotedUsers()
+    public HashMap<User,String> getVotedUsers()
     {
         return votedUsers;
     }
     // Uberprufen ob dass stimmt
     // to how user give ich scores
-    public void addScoreForRightAnswer(Answer a, User user, Case c)
+    public void addScoreForRightAnswer(String rightAnswer, User user, Case c)
     {
         if (user == c.getOwner())
         {
             for (Map.Entry votedUser : votedUsers.entrySet())
             {
-                if ( votedUser.getValue() == a)
+                if ( votedUser.getValue() == rightAnswer)
                 {
                     ScoreEvent se = new ScoreEvent(50, true, "Your such a brain! Your answer was correct", "ExpertScore");
                     User habschi = (User) votedUser.getKey();
