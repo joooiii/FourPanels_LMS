@@ -101,10 +101,11 @@ public class Playground
         denisCase.addMember(jo);
 
 
-        votingDenisCase.voting(ana, aDenisCase, denisCase);
-        votingDenisCase.voting(jo, bDenisCase, denisCase);
+        votingDenisCase.voting(ana, "yes", denisCase);
+        votingDenisCase.voting(jo, "no", denisCase);
+        votingDenisCase.voting(denis,null, denisCase);
 
-        votingDenisCase.addScoreForRightAnswer(aDenisCase, denis, denisCase);
+        votingDenisCase.addScoreForRightAnswer("yes", denis, denisCase);
         System.out.println(votingDenisCase.toString());
         votingDenisCase.corectAnswersList();
         denisCase.listOfMembers();
@@ -114,8 +115,8 @@ public class Playground
         System.out.println(jo.toString());
         System.out.println(amber.toString());
         System.out.println(depp.toString());
-        ana.getScore().sortByPointsUp();
-        System.out.println(ana.getScore().toString());
+ //       ana.getScore().sortByPointsUp();
+//        System.out.println(ana.getScore().toString());
         System.out.println();
 
 
@@ -145,12 +146,12 @@ public class Playground
         anasCase.addMember(jo);
         anasCase.addMember(denis);
 
-        votingAnasCase.voting(ana, aA,anasCase);
-        votingAnasCase.voting(jo,aA,anasCase);
-        votingAnasCase.voting(denis,bA,anasCase);
+        votingAnasCase.voting(ana,"yes" ,anasCase);
+        votingAnasCase.voting(jo,"yes",anasCase);
+        votingAnasCase.voting(denis,"no",anasCase);
 
 
-        votingAnasCase.addScoreForRightAnswer(aA,ana,anasCase);
+        votingAnasCase.addScoreForRightAnswer("yes",ana,anasCase);
         System.out.println(votingAnasCase.toString());
         votingAnasCase.corectAnswersList();
         anasCase.listOfMembers();
