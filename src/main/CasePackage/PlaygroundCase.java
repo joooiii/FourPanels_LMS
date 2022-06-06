@@ -1,4 +1,3 @@
-/*
 package CasePackage;
 import KeywordPackage.Keyword;
 import UserPackage.User;
@@ -14,7 +13,7 @@ public class PlaygroundCase
 {
     public static void main(String[] arg)
     {
-        Case case1= new Case(null,"Back pain");
+     /*   Case case1= new Case(null,"Back pain");
 
        case1.setKeywordsProcedure(Keyword.Procedure.BIOTIN_ERGAENZUNG);
        case1.setKeywordsProcedure(Keyword.Procedure.BURCH_VERFAHREN);
@@ -27,12 +26,11 @@ public class PlaygroundCase
         Voting voting= new Voting("Is it for OP?", LocalDateTime.now().plus(1,ChronoUnit.DAYS));
 
 
-
         Answer a= new Answer("Yes");
         Answer b= new Answer("NO");
         Answer c= new Answer("Egal");
         // Muss mindest 2 Antowrt sein
-        checkState(voting.getAnswers().size() < 2, "Es muss mindest 2 Antwort sein");
+
         voting.setAnswers(a);
         voting.setAnswers(b);
         voting.setAnswers(c);
@@ -45,8 +43,7 @@ public class PlaygroundCase
 
         System.out.println(case1.toString());
         System.out.println(voting.toString());
-        voting.corectAnswersList();
+        voting.corectAnswersList();*/
 
     }
 }
-*/
