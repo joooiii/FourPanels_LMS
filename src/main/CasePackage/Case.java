@@ -34,6 +34,7 @@ public class Case
         this.procedures=new ArrayList<Keyword.Procedure>();
         this.professions=new ArrayList<Keyword.Profession>();
 
+
     }
 
     public User getOwner()
