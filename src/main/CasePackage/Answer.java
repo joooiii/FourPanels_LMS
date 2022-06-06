@@ -7,14 +7,21 @@ import static validation.Ensurer.ensureNonBlank;
 public class Answer
 {
     private String answerText;
-
+    private Integer answerID;
+    private static AtomicInteger countAnswer = new AtomicInteger(0);
 
 
     public Answer(String answerText)
     {
         this.answerText=ensureNonBlank(answerText,"answer");
+        this.answerID=countAnswer.incrementAndGet();
 
 
+    }
+
+    public void setCountAnswer()
+    {
+        countAnswer=new AtomicInteger(0);
     }
 
 
@@ -27,6 +34,16 @@ public class Answer
     {
         this.answerText =ensureNonBlank(answerText, "answer");
 
+    }
+
+    public void setAnswerID()
+    {
+        this.answerID= countAnswer.incrementAndGet();
+    }
+
+    public Integer getAnserID()
+    {
+        return answerID;
     }
 
 }
