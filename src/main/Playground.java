@@ -80,32 +80,34 @@ public class Playground
         denisCase.setKeywordsProcedure(Keyword.Procedure.BIOTIN_ERGAENZUNG);
         denisCase.setKeywordProfesions(Keyword.Profession.CHIRUGIE);
         denisCase.setKeywordsSymptoms(Keyword.Symptom.BETA_CROSSLAPS);
-        TextSection text= new TextSection("Mein Patient leided","AUA,");
+        TextSection text = new TextSection("Mein Patient leided", "AUA,");
         text.addToExcistingSection();
-        MediaSection media = new MediaSection(Path.of("C:\\Users\\Johanna\\Documents\\Kolleg\\uiuiui.jpeg"),"Gehirn");
+        MediaSection media = new MediaSection(Path.of("C:\\Users\\Johanna\\Documents\\Kolleg\\uiuiui.jpeg"), "Gehirn");
         denisCase.getContent().addSection(text);
         denisCase.getContent().addSection(media);
         System.out.println(denisCase.toString());
         System.out.println(denisCase.getContent().toString());
         System.out.println();
 
-        Voting votingDenisCase= new Voting("Is it for OP?", LocalDateTime.now().plus(1, ChronoUnit.DAYS));
-        Answer aDenisCase= new Answer("yes");
-        Answer bDenisCase=new Answer("no");
-        Answer cDenisCase= new Answer("maybe");
+        Voting votingDenisCase = new Voting("Is it for OP?", LocalDateTime.now().plus(1, ChronoUnit.DAYS));
+        Answer aDenisCase = new Answer("yes");
+        Answer bDenisCase = new Answer("no");
+        Answer cDenisCase = new Answer("maybe");
 
         votingDenisCase.setAnswers(aDenisCase);
         votingDenisCase.setAnswers(bDenisCase);
         votingDenisCase.setAnswers(cDenisCase);
         denisCase.addMember(ana);
         denisCase.addMember(jo);
-        votingDenisCase.corectAnswersList();
 
-        votingDenisCase.voting(ana, 1,denisCase);
-        votingDenisCase.voting(jo,2,denisCase);
 
-        votingDenisCase.addScoreForRightAnswer(1,denis,denisCase);
+        votingDenisCase.voting(ana, aDenisCase, denisCase);
+        votingDenisCase.voting(jo, bDenisCase, denisCase);
+
+        votingDenisCase.addScoreForRightAnswer(aDenisCase, denis, denisCase);
         System.out.println(votingDenisCase.toString());
+        votingDenisCase.corectAnswersList();
+        denisCase.listOfMembers();
 
         System.out.println(denis.toString());
         System.out.println(ana.toString());
@@ -115,8 +117,6 @@ public class Playground
         ana.getScore().sortByPointsUp();
         System.out.println(ana.getScore().toString());
         System.out.println();
-        System.out.println(votingDenisCase.toString());
-        votingDenisCase.corectAnswersList();
 
 
         //Anas CASE-----------------------------------------------------------------
@@ -133,7 +133,7 @@ public class Playground
         System.out.println(anasCase.getContent().toString());
         System.out.println();
 
-        Voting votingAnasCase= new Voting("Ist er wirklich tod", LocalDateTime.now().plus(2, ChronoUnit.DAYS));
+        Voting votingAnasCase= new Voting("Ist er wirklich tod?", LocalDateTime.now().plus(2, ChronoUnit.MINUTES));
         Answer aA= new Answer("yes");
         Answer bA=new Answer("no");
         Answer cA= new Answer("maybe");
@@ -141,26 +141,27 @@ public class Playground
         votingAnasCase.setAnswers(aA);
         votingAnasCase.setAnswers(bA);
         votingAnasCase.setAnswers(cA);
-        anasCase.addMember(ana);
+
         anasCase.addMember(jo);
-        votingAnasCase.corectAnswersList();
+        anasCase.addMember(denis);
 
-        votingAnasCase.voting(ana, 2,anasCase);
-        votingAnasCase.voting(jo,1,anasCase);
+        votingAnasCase.voting(ana, aA,anasCase);
+        votingAnasCase.voting(jo,aA,anasCase);
+        votingAnasCase.voting(denis,bA,anasCase);
 
-        votingAnasCase.addScoreForRightAnswer(1,ana,anasCase);
+
+        votingAnasCase.addScoreForRightAnswer(aA,ana,anasCase);
         System.out.println(votingAnasCase.toString());
-
+        votingAnasCase.corectAnswersList();
+        anasCase.listOfMembers();
         System.out.println(denis.toString());
         System.out.println(ana.toString());
         System.out.println(jo.toString());
         System.out.println(amber.toString());
         System.out.println(depp.toString());
-        ana.getScore().sortByPointsUp();
-        System.out.println(ana.getScore().toString());
+//        ana.getScore().sortByPointsUp();
+//        System.out.println(ana.getScore().toString());
         System.out.println();
-        System.out.println(votingAnasCase.toString());
-        votingAnasCase.corectAnswersList();
 
     }
-}
+    }
