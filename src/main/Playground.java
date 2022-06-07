@@ -99,11 +99,13 @@ public class Playground
         votingDenisCase.setAnswers(cDenisCase);
         denisCase.addMember(ana);
         denisCase.addMember(jo);
+        denisCase.addMember(amber);
 
 
         votingDenisCase.voting(ana, "yes", denisCase);
         votingDenisCase.voting(jo, "no", denisCase);
         votingDenisCase.voting(denis,null, denisCase);
+        votingDenisCase.voting(amber,"no",denisCase);
 
         votingDenisCase.addScoreForRightAnswer("yes", denis, denisCase);
         System.out.println(votingDenisCase.toString());
@@ -145,6 +147,7 @@ public class Playground
 
         anasCase.addMember(jo);
         anasCase.addMember(denis);
+        anasCase.addMember(amber);
 
         votingAnasCase.voting(ana,"yes" ,anasCase);
         votingAnasCase.voting(jo,"yes",anasCase);
