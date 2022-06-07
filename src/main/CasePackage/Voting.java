@@ -113,7 +113,7 @@ public class Voting
             System.out.println("U are too late for vote");
         }
     }
-    
+
     public double berechneSummeResults()
     {
         double sum = 0;
