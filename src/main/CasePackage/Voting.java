@@ -12,7 +12,7 @@ import static validation.Ensurer.*;
 
 public class Voting
 {
-    // add Antwort als Voting...
+
     private String question;
     private HashMap<String, Double> results;
     private LocalDateTime endsAt;
@@ -64,12 +64,6 @@ public class Voting
         this.endsAt = ensureValidEndDateTime(endsAt);
     }
 
-    // how to make 1 user to vote...
-   /* public void userThatVotet()
-    {
-        ArrayList<Integer> userThatVoted= new ArrayList<Integer>();
-
-    }*/
 
     public void voting(User user, String voteForAnswer, Case cases)
     {
@@ -81,7 +75,8 @@ public class Voting
         checkState(!votedUsers.containsKey(user), "U have already voted");
         if (voteOnTime)
         {
-           // checkState(results.containsKey(a) || a==null, "That answer doesnt exist");
+            // Is that existig Answer or not
+            checkState(results.containsKey(voteForAnswer)  || voteForAnswer==null, "That answer doesnt exist");
 
             for (Answer a: answersList)
             {
@@ -122,12 +117,11 @@ public class Voting
             sum += values;
         }
         return sum;
-
     }
+
 
     public List<String> mostVotedAnswer()
     {
-
         List <String>list = Collections.singletonList("There is no right answer");
         Double max = Collections.max(results.values());
         List<String>keys = new ArrayList<>();
@@ -144,7 +138,7 @@ public class Voting
         }
         return keys;
     }
-
+    //only one answer, when there is answer with same max value it give only 1 zuruck
     public void corectAnswersList()
     {
         for (Map.Entry result : results.entrySet())
@@ -174,8 +168,7 @@ public class Voting
     {
         return votedUsers;
     }
-    // Uberprufen ob dass stimmt
-    // to how user give ich scores
+   // List von user and what answer that they have voted
     public void addScoreForRightAnswer(String rightAnswer, User user, Case c)
     {
         if (user == c.getOwner())
