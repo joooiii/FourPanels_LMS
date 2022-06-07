@@ -74,7 +74,7 @@ public class Case
         this.updatedAt = Instant.now();
     }
 
-
+// Owner of a Case is automatic added
     public void addMember(User user)
     {
         if (!members.contains(user))
@@ -87,7 +87,7 @@ public class Case
         }
     }
 
-// what are the members?
+
     public List<User> getMembers()
     {
         return members;
