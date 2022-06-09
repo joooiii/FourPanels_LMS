@@ -118,8 +118,8 @@ public class Playground
         System.out.println(jo.toString());
         System.out.println(amber.toString());
         System.out.println(depp.toString());
- //       ana.getScore().sortByPointsUp();
-//        System.out.println(ana.getScore().toString());
+        ana.getScore().sortByPointsUp();
+      System.out.println(ana.getScore().toString());
         System.out.println();
 
 
@@ -164,8 +164,8 @@ public class Playground
         System.out.println(jo.toString());
         System.out.println(amber.toString());
         System.out.println(depp.toString());
-//        ana.getScore().sortByPointsUp();
-//        System.out.println(ana.getScore().toString());
+        ana.getScore().sortByPointsUp();
+        System.out.println(ana.getScore().toString());
         System.out.println();
 
     }
