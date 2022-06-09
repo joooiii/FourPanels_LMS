@@ -26,7 +26,12 @@ public class MediaSection extends Section
 
     }
 
-    public void displayImage(String path)
+    public Path getPath()
+    {
+        return path;
+    }
+
+    public void displayImage(MediaSection media)
     {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -34,8 +39,8 @@ public class MediaSection extends Section
         }
 
         try {
-            System.out.println("Get Image from " + path);
-            File folderInput = new File(path);
+            System.out.println("Get Image from " + media.getPath().toString());
+            File folderInput = new File(media.getPath().toString());
             BufferedImage image = ImageIO.read(folderInput);
             System.out.println("Load image into frame...");
             JLabel label = new JLabel(new ImageIcon(image));
