@@ -4,6 +4,7 @@ package CasePackage;
 import validation.Ensurer;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -30,13 +31,9 @@ public class Content
 
     public List<Section> getSections()
     {
-        return sections;
+        return Collections.unmodifiableList(sections);
     }
 
-    public void setSections(List<Section> sections)
-    {
-        this.sections = sections;
-    }
 
     public int getAnzahl()
     {

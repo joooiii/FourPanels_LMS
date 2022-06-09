@@ -1,8 +1,12 @@
 package CasePackage;
 import validation.Ensurer;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -16,26 +20,36 @@ public class MediaSection extends Section
     {
 
         super(title);
-        this.path = Path.of(addNewFile(path));
+        this.path = Path.of(Ensurer.ensureValidPath(path.toString()));
+        this.mimeType = Ensurer.ensureValidMimeType(path);
+
 
     }
 
-    public String addNewFile(Path path)
+    public void displayImage(String path)
     {
-        Ensurer.ensureNonBlank(path.toString(), "Path");
-
-        try
-        {
-            mimeType = Files.probeContentType(path);
-            return path.toString();
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-            throw new IllegalArgumentException("Help");
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
         }
 
-
+        try {
+            System.out.println("Get Image from " + path);
+            File folderInput = new File(path);
+            BufferedImage image = ImageIO.read(folderInput);
+            System.out.println("Load image into frame...");
+            JLabel label = new JLabel(new ImageIcon(image));
+            JFrame f = new JFrame();
+            f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            f.getContentPane().add(label);
+            f.pack();
+            f.setLocation(200, 200);
+            f.setVisible(true);
+        } catch (Exception exp) {
+            exp.printStackTrace();
+        }
     }
+
 
     @Override
     public String toString()

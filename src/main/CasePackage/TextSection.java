@@ -2,6 +2,9 @@ package CasePackage;
 
 import validation.Ensurer;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Scanner;
 
 public class TextSection extends Section
@@ -46,6 +49,19 @@ public class TextSection extends Section
 
 
     }
+
+//    public void addfromtextDocument(String path)
+//    {
+//        Path filePath = Path.of(path);
+//
+//        try
+//        {
+//            text += Files.readString(filePath);
+//        } catch (IOException e)
+//        {
+//            e.printStackTrace();
+//        }
+//    }
 
     @Override
     public String toString()

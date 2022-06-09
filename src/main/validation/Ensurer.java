@@ -2,6 +2,9 @@ package validation;
 
 import UserPackage.User;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -108,6 +111,49 @@ import java.util.Objects;
                 );
                 return u;
         }
+
+        public static boolean isValidPath(String path)
+        {
+            return path.matches("(?:[a-zA-Z]\\:)\\\\([\\w-]+\\\\)*\\w([\\w-.])+");
+        }
+
+        public static String ensureValidPath(String path)
+        {
+            if (!isValidPath(path))
+                throw new IllegalArgumentException(
+                        String.format("%s ist kein gültiger Pfad", path));
+
+            return path;
+        }
+
+        public static boolean isValidMimeType(Path path)
+        {
+            try
+            {
+                return Files.probeContentType(path) != null;
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+                throw new IllegalArgumentException("Help");
+            }
+        }
+
+        public static String ensureValidMimeType(Path path)
+        {
+            if (!isValidMimeType(path))
+                throw new IllegalArgumentException(
+                        String.format("%s ist kein gültiger MimeType oder Pfad", path));
+
+            try
+            {
+                return Files.probeContentType(path);
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+                throw new IllegalArgumentException("Kein gültiger Pfad/MimeType");
+            }
+        }
+
 
     }
 

@@ -82,7 +82,8 @@ public class Playground
         denisCase.setKeywordsSymptoms(Keyword.Symptom.BETA_CROSSLAPS);
         TextSection text = new TextSection("Mein Patient leided", "AUA,");
         text.addToExcistingSection();
-        MediaSection media = new MediaSection(Path.of("C:\\Users\\Johanna\\Documents\\Kolleg\\uiuiui.jpeg"), "Gehirn");
+        MediaSection media = new MediaSection(Path.of("C:\\Users\\Johanna\\Documents\\Kolleg\\Info\\Unbenannt.jpg"), "Gehirn");
+        media.displayImage("C:\\Users\\Johanna\\Documents\\Kolleg\\Info\\Unbenannt.jpg");
         denisCase.getContent().addSection(text);
         denisCase.getContent().addSection(media);
         System.out.println(denisCase.toString());
