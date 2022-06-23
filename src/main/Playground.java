@@ -83,7 +83,7 @@ public class Playground
         TextSection text = new TextSection("Mein Patient leided", "AUA,");
         text.addToExcistingSection();
         MediaSection media = new MediaSection(Path.of("C:\\Users\\Johanna\\Documents\\Kolleg\\Info\\Unbenannt.jpg"), "Gehirn");
-        media.displayImage("C:\\Users\\Johanna\\Documents\\Kolleg\\Info\\Unbenannt.jpg");
+        media.displayImage(media);
         denisCase.getContent().addSection(text);
         denisCase.getContent().addSection(media);
         System.out.println(denisCase.toString());
